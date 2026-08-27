@@ -1,0 +1,136 @@
+/* 담당자 7 · F-PROV-004/005: 공통 마이페이지 틀 안에서 프로필·포트폴리오 편집 영역만 정돈합니다. */
+.provider-profile-editor {
+  color: #101828;
+}
+
+.mypage-profile-panel,
+.mypage-profile-panel > .provider-profile-editor {
+  width: 100%;
+}
+
+.provider-profile-editor > .space-y-6 {
+  display: grid;
+  gap: 22px;
+}
+
+.provider-profile-editor > .space-y-6 > * {
+  margin-block: 0 !important;
+}
+
+/* 담당자 7 · F-PROV-004/005: 제공자 마이페이지에서는 기본 프로필과 포트폴리오를 좌우 영역으로 나눕니다. */
+.provider-profile-editor__split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+}
+
+/* 담당자 7 · F-PROV-005: 포트폴리오 입력과 기존 항목 관리를 넓은 화면에서 좌우로 배치합니다. */
+.provider-portfolio-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.9fr);
+  align-items: start;
+  gap: 24px;
+}
+
+.provider-profile-editor__card {
+  border-color: #dfe5ee !important;
+  border-radius: 20px !important;
+  padding: 28px !important;
+  box-shadow: 0 10px 28px rgb(16 24 40 / 5%);
+}
+
+.provider-profile-editor__section-heading {
+  margin-bottom: 24px;
+  border-bottom: 1px solid #e9edf3;
+  padding-bottom: 18px;
+}
+
+.provider-profile-editor__section-heading h2 {
+  margin: 0;
+  color: #101828;
+  font-size: 20px;
+  letter-spacing: 0;
+}
+
+.provider-profile-editor__section-heading p {
+  margin: 7px 0 0;
+  color: #667085;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.provider-profile-editor__card input,
+.provider-profile-editor__card textarea {
+  border-color: #d8e0eb;
+  border-radius: 10px;
+  background: #fbfcfe;
+  transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.provider-profile-editor__card input:focus,
+.provider-profile-editor__card textarea:focus {
+  border-color: #6ca0fb;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgb(0 100 255 / 11%);
+}
+
+.provider-profile-editor__portfolio-list {
+  margin: 0;
+  border-top: 1px solid #e9edf3;
+  padding: 0;
+  list-style: none;
+}
+
+.provider-profile-editor__portfolio-list > li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid #e9edf3;
+  padding: 16px 0;
+}
+
+.provider-profile-editor__portfolio-thumb {
+  display: flex;
+  width: 112px;
+  aspect-ratio: 4 / 3;
+  flex: 0 0 112px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid #e1e6ee;
+  border-radius: 8px;
+  background: #f7f8fa;
+  color: #98a2b3;
+  font-size: 12px;
+}
+
+.provider-profile-editor__card [class*='border-dashed'] {
+  border-color: #b9c9e0;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #f7faff, #fcfdff);
+}
+
+@media (max-width: 640px) {
+  .provider-profile-editor__card {
+    border-radius: 17px !important;
+    padding: 21px 18px !important;
+  }
+
+  .provider-profile-editor__portfolio-list > li {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .provider-profile-editor__portfolio-thumb {
+    width: 88px;
+    flex-basis: 88px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .provider-profile-editor__split,
+  .provider-portfolio-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

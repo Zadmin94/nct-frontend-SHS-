@@ -1,0 +1,119 @@
+.admin-detail-drawer {
+  position: fixed;
+  z-index: 110;
+  inset: 0;
+  display: flex;
+  justify-content: flex-end;
+  background: rgb(15 23 42 / 42%);
+  backdrop-filter: blur(2px);
+  animation: admin-detail-drawer-fade-in 160ms ease-out;
+}
+
+.admin-detail-drawer__panel {
+  display: flex;
+  width: min(620px, 100%);
+  height: 100%;
+  flex-direction: column;
+  background: #f8fafc;
+  box-shadow: -20px 0 56px rgb(15 23 42 / 18%);
+  animation: admin-detail-drawer-slide-in 220ms ease-out;
+}
+
+.admin-detail-drawer__header {
+  display: flex;
+  min-height: 86px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 24px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #fff;
+}
+
+.admin-detail-drawer__header span {
+  display: block;
+  margin-bottom: 4px;
+  color: #0057d9;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+
+.admin-detail-drawer__header h2 {
+  margin: 0;
+  color: #172033;
+  font-size: 21px;
+  line-height: 1.35;
+}
+
+.admin-detail-drawer__header button {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 10px;
+  background: #f1f5f9;
+  color: #475569;
+  cursor: pointer;
+}
+
+.admin-detail-drawer__header button:hover {
+  background: #e5efff;
+  color: #0057d9;
+}
+
+.admin-detail-drawer__header button:focus-visible {
+  outline: 3px solid rgb(0 100 255 / 20%);
+  outline-offset: 2px;
+}
+
+.admin-detail-drawer__body {
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.admin-detail-drawer__footer {
+  display: flex;
+  min-height: 72px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 14px 24px;
+  border-top: 1px solid #e2e8f0;
+  background: #fff;
+}
+
+@keyframes admin-detail-drawer-fade-in {
+  from { background: rgb(15 23 42 / 0%); }
+}
+
+@keyframes admin-detail-drawer-slide-in {
+  from { transform: translateX(36px); opacity: .65; }
+}
+
+@media (max-width: 640px) {
+  .admin-detail-drawer__header,
+  .admin-detail-drawer__body,
+  .admin-detail-drawer__footer {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .admin-detail-drawer__panel {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-detail-drawer,
+  .admin-detail-drawer__panel {
+    animation: none;
+  }
+}

@@ -1,0 +1,145 @@
+.operations-preview {
+  color: var(--admin-text, #172033);
+}
+
+.operations-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.operations-summary__card {
+  display: flex;
+  min-height: 118px;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+}
+
+.operations-summary__state {
+  grid-column: 1 / -1;
+  min-height: 118px;
+}
+
+.operations-summary.is-loading {
+  opacity: 0;
+  animation: operations-skeleton-reveal 0s linear 250ms forwards;
+}
+
+@keyframes operations-skeleton-reveal {
+  to { opacity: 1; }
+}
+
+.operations-summary__card > div:last-child {
+  display: grid;
+  gap: 3px;
+}
+
+.operations-summary__card span,
+.operations-summary__card small {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.operations-summary__card strong {
+  color: #172033;
+  font-size: 26px;
+  line-height: 1.2;
+}
+
+.operations-summary__icon {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 12px;
+}
+
+.operations-summary__icon--danger {
+  background: #fff0f0;
+  color: #dc2626;
+}
+
+.operations-card {
+  overflow: hidden;
+}
+
+.operations-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: flex-start;
+  gap: 14px;
+  margin: 0 !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--admin-border, #e2e8f0) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.operations-filter-error {
+  display: flex;
+  width: 100%;
+  flex: 1 0 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  background: #fff7f7;
+  color: #b42318;
+}
+
+.operations-date {
+  flex: 0 1 170px;
+}
+
+.operations-filters label {
+  display: grid;
+  min-width: 150px;
+  gap: 7px;
+}
+
+.operations-search {
+  width: min(360px, 100%);
+  margin-left: auto;
+}
+
+.operations-table-wrap .admin-table {
+  min-width: 1020px;
+}
+
+.operations-table__id {
+  color: #0057d9 !important;
+  font-weight: 800;
+}
+
+.operations-table__content {
+  min-width: 280px;
+}
+
+.operations-pagination {
+  margin: 0;
+  padding: 18px 0;
+}
+
+@media (max-width: 900px) {
+  .operations-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .operations-filters {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .operations-filters label,
+  .operations-search {
+    width: 100%;
+    min-width: 0;
+    margin-left: 0;
+  }
+}

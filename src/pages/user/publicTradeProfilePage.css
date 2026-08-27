@@ -1,0 +1,416 @@
+/* 담당자 7 · 공개 거래 프로필: 제공자 공개 프로필과 같은 좌측 프로필·우측 콘텐츠 구조를 사용합니다. */
+.trade-profile-page {
+  padding-top: 40px;
+}
+
+.trade-profile-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 16px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #525866;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.trade-profile-back-link:hover {
+  color: var(--color-primary, #0064ff);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.trade-profile-back-link svg {
+  width: 17px;
+  height: 17px;
+}
+
+.trade-profile-layout {
+  display: grid;
+  grid-template-columns: 310px minmax(0, 1fr);
+  align-items: start;
+  gap: 40px;
+}
+
+.trade-profile-card,
+.trade-profile-reviews {
+  border: 1px solid #e4e7ec;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.trade-profile-card {
+  position: relative;
+  padding: 30px;
+}
+
+.trade-profile-report-button {
+  display: inline-flex;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid #e34850;
+  border-radius: 12px;
+  padding: 0 13px;
+  background: #fff;
+  color: #c72c35;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.trade-profile-report-button:hover {
+  border-color: #c72c35;
+  background: #fff1f2;
+}
+
+.trade-profile-report-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.trade-profile-report-button:focus-visible,
+.trade-profile-page button:focus-visible {
+  outline: 3px solid rgb(0 100 255 / 22%);
+  outline-offset: 2px;
+}
+
+.trade-profile-avatar {
+  display: flex;
+  position: relative;
+  width: 92px;
+  height: 92px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 22px;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #e3edff, #f4e9ff);
+  color: #234d9a;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.trade-profile-avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.trade-profile-card > h1 {
+  margin: 0;
+  color: #171a20;
+  font-size: var(--text-h1);
+  line-height: var(--text-h1--line-height);
+}
+
+.trade-profile-trust {
+  margin-top: 28px;
+  border-top: 1px solid #f0efec;
+  padding-top: 24px;
+}
+
+.trade-profile-trust h2 {
+  margin: 0 0 12px;
+  color: #25282d;
+  font-size: var(--text-body-lg);
+  line-height: var(--text-body-lg--line-height);
+}
+
+.trade-profile-rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  color: #8a5b00;
+  font-weight: 900;
+}
+
+.trade-profile-rating svg {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+  fill: #ffca3a;
+  color: #ffca3a;
+}
+
+.trade-profile-rating strong {
+  font-size: 18px;
+}
+
+.trade-profile-rating span {
+  color: #6c6a65;
+  font-size: var(--text-caption);
+  line-height: var(--text-caption--line-height);
+  font-weight: 500;
+}
+
+.trade-profile-rating.is-empty {
+  align-items: flex-start;
+  color: #667085;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.trade-profile-trust__note {
+  margin: 14px 0 0;
+  color: #77756f;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.trade-profile-inline-state {
+  padding: 4px 0;
+}
+
+.trade-profile-inline-state p {
+  margin: 0;
+  color: #b42318;
+  font-size: 13px;
+}
+
+.trade-profile-inline-state button,
+.trade-profile-review-state button {
+  border: 0;
+  padding: 4px 0;
+  background: transparent;
+  color: #0964dc;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.trade-profile-trust__loading {
+  display: grid;
+  gap: 8px;
+}
+
+.trade-profile-trust__loading span,
+.trade-profile-review-skeleton span {
+  display: block;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #edf1f6 25%, #f7f9fb 45%, #edf1f6 65%);
+  background-size: 240% 100%;
+  animation: trade-profile-shimmer 1.35s ease-in-out infinite;
+}
+
+.trade-profile-trust__loading span:first-child {
+  width: 55%;
+  height: 20px;
+}
+
+.trade-profile-trust__loading span:last-child {
+  width: 82%;
+  height: 13px;
+}
+
+.trade-profile-reviews {
+  min-height: 0;
+  padding: 32px;
+}
+
+.trade-profile-reviews__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #e2e1dc;
+}
+
+.trade-profile-reviews__header > strong {
+  flex: 0 0 auto;
+  margin-bottom: 12px;
+  color: #667085;
+  font-size: 13px;
+}
+
+.trade-profile-review-tabs {
+  display: flex;
+  min-width: 0;
+  align-items: flex-end;
+  gap: 28px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.trade-profile-review-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.trade-profile-review-tabs button {
+  flex: 0 0 auto;
+  margin: 0 0 -1px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  padding: 0 2px 12px;
+  background: transparent;
+  color: #667085;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 160ms ease, color 160ms ease;
+}
+
+.trade-profile-review-tabs button:hover {
+  color: #1e5db4;
+}
+
+.trade-profile-review-tabs button.is-active {
+  border-bottom-color: var(--color-primary, #0064ff);
+  color: var(--color-primary, #0064ff);
+  font-weight: 850;
+}
+
+.trade-profile-review-skeleton,
+.trade-profile-review-list {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trade-profile-review-skeleton span {
+  height: 126px;
+}
+
+.trade-profile-review-list li {
+  border: 1px solid #e4e7ec;
+  border-radius: 8px;
+  padding: 18px;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.trade-profile-review-list li:hover {
+  border-color: #9bbcf2;
+  background: #f8fbff;
+}
+
+.trade-profile-review-list__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.trade-profile-review-list__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #d99800;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.trade-profile-review-list__meta svg {
+  width: 16px;
+  height: 16px;
+}
+
+.trade-profile-review-list__meta time,
+.trade-profile-review-list__reviewer {
+  color: #8a96a8;
+  font-size: 13px;
+}
+
+.trade-profile-review-list li > strong {
+  display: block;
+  color: #405069;
+  font-size: 14px;
+}
+
+.trade-profile-review-list li > p {
+  margin: 8px 0 11px;
+  color: #26364d;
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.trade-profile-review-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 72px 20px;
+  color: #758296;
+  text-align: center;
+}
+
+.trade-profile-review-state > svg {
+  width: 34px;
+  height: 34px;
+  margin-bottom: 4px;
+  color: #9eb0c5;
+}
+
+.trade-profile-review-state > strong {
+  color: #34435a;
+  font-size: 16px;
+}
+
+.trade-profile-review-state > span {
+  font-size: 13px;
+}
+
+@keyframes trade-profile-shimmer {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+
+@media (max-width: 960px) {
+  .trade-profile-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 680px) {
+  .trade-profile-page {
+    padding-top: 34px;
+  }
+
+  .trade-profile-card,
+  .trade-profile-reviews {
+    border-radius: 8px;
+    padding: 22px 18px;
+  }
+
+  .trade-profile-review-list__meta {
+    align-items: flex-start;
+  }
+
+  .trade-profile-review-tabs {
+    gap: 20px;
+  }
+
+  .trade-profile-review-tabs button {
+    padding: 0 0 11px;
+    font-size: 13px;
+  }
+
+  .trade-profile-review-state {
+    padding: 56px 18px;
+  }
+}

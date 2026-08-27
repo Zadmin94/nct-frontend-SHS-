@@ -1,0 +1,494 @@
+.admin-service-filter {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(130px, .75fr)) minmax(300px, 1.4fr) minmax(220px, 1.5fr) auto;
+  align-items: end;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding: 18px;
+}
+
+.admin-service-filter label {
+  display: grid;
+  gap: 7px;
+  color: #5f5e5a;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.admin-service-filter select,
+.admin-service-filter input {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid #e2e1dc;
+  border-radius: 8px;
+  background: #fff;
+  color: #1a1a18;
+  font: inherit;
+}
+
+.admin-service-filter .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 42px;
+}
+
+.admin-service-list {
+  overflow: hidden;
+}
+
+.admin-service-list table {
+  min-width: 1340px;
+}
+
+.admin-layout .admin-service-list td.admin-service-list__title {
+  width: 300px;
+  min-width: 300px;
+  max-width: 300px;
+  text-align: center !important;
+  white-space: nowrap !important;
+}
+
+.admin-service-list td.admin-service-list__title > .admin-table__ellipsis-content,
+.admin-service-list td.admin-service-list__title strong {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-service-list td.admin-service-list__flow-cell {
+  width: 190px;
+  min-width: 190px;
+  max-width: 190px;
+}
+
+.admin-service-list__flow {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.admin-service-list__flow > .admin-badge {
+  flex: 0 0 auto;
+}
+
+.admin-service-list__flow-summary {
+  min-width: 0;
+  overflow: hidden;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-service-page__filter-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -7px 0 18px;
+  color: #c43d3d;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.admin-service-page__filter-error .btn {
+  min-height: 34px;
+}
+
+.admin-service-page__state {
+  display: flex;
+  min-height: 120px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  border: 1px solid #e2e1dc;
+  border-radius: 12px;
+  background: #fff;
+  color: #5f5e5a;
+}
+
+.admin-service-page__state.is-error {
+  border-color: #f0caca;
+  color: #b62f2f;
+}
+
+.admin-service-detail {
+  display: grid;
+  gap: 18px;
+}
+
+.admin-service-detail__summary {
+  padding: 22px;
+  border: 1px solid #dbe7f8;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #fff 0%, #f2f7ff 100%);
+}
+
+.admin-service-detail__status-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.admin-service-detail__status-line > span {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.admin-service-detail__badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 7px;
+}
+
+.admin-service-detail__summary h3 {
+  margin: 16px 0 0;
+  color: #172033;
+  font-size: 23px;
+  line-height: 1.45;
+}
+
+.admin-service-detail__facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.admin-service-detail__facts > div {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.admin-service-detail__facts span {
+  display: block;
+  margin-bottom: 7px;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.admin-service-detail__facts strong {
+  display: block;
+  overflow: hidden;
+  color: #172033;
+  font-size: 14px;
+  line-height: 1.5;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-service-detail__section {
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.admin-service-detail__section h4 {
+  margin: 0 0 13px;
+  color: #172033;
+  font-size: 15px;
+}
+
+.admin-service-detail__section p {
+  margin: 0;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.75;
+  white-space: pre-wrap;
+}
+
+.admin-service-detail__section dl {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 10px 14px;
+  margin: 0;
+}
+
+.admin-service-detail__section dt,
+.admin-service-detail__section dd {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.admin-service-detail__section dt {
+  color: #64748b;
+  font-weight: 700;
+}
+
+.admin-service-detail__section dd {
+  color: #273244;
+}
+
+.admin-service-detail__section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 13px;
+}
+
+.admin-service-detail__section-heading h4 {
+  margin: 0;
+}
+
+.admin-service-detail__section-heading > span {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.admin-service-detail__quote-list {
+  display: grid;
+  gap: 10px;
+}
+
+.admin-service-detail__quote-card {
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+
+.admin-service-detail__quote-card.is-selected {
+  border-color: #93c5fd;
+  background: #eff6ff;
+  box-shadow: inset 3px 0 0 #2563eb;
+}
+
+.admin-service-detail__quote-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.admin-service-detail__quote-header > strong {
+  color: #172033;
+  font-size: 14px;
+}
+
+.admin-service-detail__quote-card dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 18px;
+  margin: 0;
+}
+
+.admin-service-detail__quote-card dl > div {
+  min-width: 0;
+}
+
+.admin-service-detail__quote-card dt,
+.admin-service-detail__quote-card dd {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.admin-service-detail__quote-card dt {
+  margin-bottom: 3px;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.admin-service-detail__quote-card dd {
+  color: #273244;
+  overflow-wrap: anywhere;
+}
+
+.admin-service-detail__quote-provider {
+  grid-column: 1 / -1;
+}
+
+.admin-service-detail__quote-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+.admin-service-detail__empty {
+  padding: 16px;
+  border-radius: 10px;
+  background: #f8fafc;
+  color: #64748b;
+  text-align: center;
+}
+
+.admin-service-detail__section.is-selected-quote {
+  border-color: #bfdbfe;
+  background: #f8fbff;
+}
+
+.admin-service-detail__section.is-trade-flow {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+.admin-service-detail__section.is-operations {
+  border-color: #fed7aa;
+  background: #fffaf2;
+}
+
+.admin-service-detail__operation-actions,
+.admin-service-operation-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.admin-service-operation-modal {
+  display: grid;
+  gap: 16px;
+}
+
+.admin-service-operation-modal > p {
+  margin: 0;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.admin-service-operation-modal label {
+  display: grid;
+  gap: 8px;
+  color: #334155;
+  font-weight: 700;
+}
+
+.admin-service-operation-modal textarea {
+  min-height: 112px;
+  padding: 12px;
+  border: 1px solid #d8dee9;
+  border-radius: 9px;
+  font: inherit;
+  resize: vertical;
+}
+
+.admin-service-operation-modal__validation,
+.admin-service-operation-modal__feedback {
+  margin: 0;
+  color: #b42318;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* 담당자 7 · F-OPS-010/021: 드로어를 대체한 견적 요청 상세 화면입니다. */
+.admin-service-detail-page .admin-page-header__action .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.admin-service-detail-page__surface {
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: #f8fafc;
+}
+
+.admin-service-detail-page__columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(320px, .65fr);
+  align-items: start;
+  gap: 18px;
+}
+
+.admin-service-detail-page__main,
+.admin-service-detail-page__aside {
+  display: grid;
+  min-width: 0;
+  gap: 18px;
+}
+
+.admin-service-detail-page__aside {
+  position: sticky;
+  top: 18px;
+}
+
+@media (max-width: 1120px) {
+  .admin-service-detail-page__columns {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-service-detail-page__aside {
+    position: static;
+  }
+}
+
+@media (max-width: 1250px) {
+  .admin-service-filter {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .admin-service-filter__search {
+    grid-column: span 3;
+  }
+
+  .admin-service-filter .admin-filter-actions {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 620px) {
+  .admin-service-filter {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-service-filter__search {
+    grid-column: auto;
+  }
+
+  .admin-service-filter .admin-filter-actions {
+    grid-column: auto;
+  }
+
+  .admin-service-filter .btn {
+    justify-content: center;
+  }
+
+  .admin-service-filter .admin-date-range-filter {
+    min-width: 0;
+  }
+
+  .admin-service-detail__facts {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-service-detail__quote-card dl {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-service-detail__quote-provider {
+    grid-column: auto;
+  }
+
+  .admin-service-detail__operation-actions,
+  .admin-service-operation-modal__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .admin-service-detail-page__surface {
+    padding: 12px;
+  }
+}

@@ -1,0 +1,426 @@
+/* 담당자 7 · F-OPS-010~023: 활성 관리자 화면이 공유하는 시각 규칙입니다. */
+.admin-layout {
+  --admin-accent: var(--color-primary, #0064ff);
+  --admin-accent-dark: var(--color-primary-dark, #0048bf);
+  --admin-accent-soft: #edf4ff;
+  --admin-bg: #f6f8fc;
+  --admin-surface: #fff;
+  --admin-surface-subtle: #f8fafc;
+  --admin-border: #e2e8f0;
+  --admin-border-strong: #d0d7e2;
+  --admin-text: #172033;
+  --admin-text-muted: #64748b;
+  --admin-radius: 14px;
+  --admin-shadow: 0 4px 14px rgb(15 23 42 / 5%);
+  background: var(--admin-bg);
+  color: var(--admin-text);
+}
+
+.admin-layout .admin-layout__content > * {
+  width: min(1480px, 100%);
+  max-width: none;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.admin-layout .admin-page-header {
+  min-height: 48px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.admin-layout .admin-page-header h1 {
+  color: var(--admin-text);
+  font-size: 30px;
+  line-height: 1.25;
+  letter-spacing: -.025em;
+}
+
+.admin-layout .admin-page-header__action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-layout :is(
+  .card,
+  .admin-section-card,
+  .admin-dashboard-panel,
+  .admin-summary-card,
+  .admin-member-pending__card,
+  .admin-noti-group,
+  .admin-bjn-setting-section,
+  .operations-summary__card,
+  .operations-card
+) {
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  background: var(--admin-surface);
+  box-shadow: var(--admin-shadow);
+}
+
+.admin-layout .admin-section-card {
+  overflow: hidden;
+}
+
+.admin-layout :is(.admin-notice-list.card, .admin-category-list.card) {
+  overflow: hidden;
+  padding: 0;
+}
+
+.admin-layout .admin-section-card__header {
+  min-height: 72px;
+  padding: 17px 20px;
+  border-bottom: 1px solid var(--admin-border);
+  background: var(--admin-surface-subtle);
+}
+
+.admin-layout .admin-section-card__header h2 {
+  color: var(--admin-text);
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.admin-layout .admin-section-card__header p {
+  margin-top: 4px;
+  color: var(--admin-text-muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.admin-layout .admin-section-card__action {
+  color: #475569;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.admin-layout :is(
+  .admin-notice-filters,
+  .admin-provider-filter,
+  .admin-service-filter,
+  .admin-category-form,
+  .admin-bjn-filters,
+  .operations-filters
+) {
+  margin-bottom: 18px;
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  padding: 18px;
+  background: var(--admin-surface);
+  box-shadow: var(--admin-shadow);
+}
+
+.admin-layout :is(
+  .admin-notice-filters,
+  .admin-provider-filter,
+  .admin-service-filter,
+  .admin-category-form,
+  .admin-bjn-filters,
+  .operations-filters,
+  .admin-bjn-setting-grid,
+  .admin-notice-form
+) label {
+  color: #475569;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* 담당자 7 · 관리자 목록 공통: 날짜 시작·종료 입력을 하나의 등록일 범위로 묶습니다. */
+.admin-layout .admin-date-range-filter {
+  min-width: 300px;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.admin-layout .admin-date-range-filter legend {
+  margin-bottom: 7px;
+  padding: 0;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.admin-layout .admin-date-range-filter__controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-layout .admin-date-range-filter__controls > span {
+  color: var(--admin-text-muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.admin-layout :is(
+  .admin-notice-filters,
+  .admin-provider-filter,
+  .admin-service-filter,
+  .admin-category-form,
+  .admin-bjn-filters,
+  .operations-filters,
+  .admin-bjn-setting-grid,
+  .admin-notice-form,
+  .admin-operation-detail,
+  .admin-auction-cancellation,
+  .admin-provider-detail
+) :is(input:not([type='checkbox']):not([type='radio']), select, textarea) {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid var(--admin-border-strong);
+  border-radius: 9px;
+  padding: 0 12px;
+  background: #fff;
+  color: var(--admin-text);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.admin-layout :is(
+  .admin-notice-filters,
+  .admin-provider-filter,
+  .admin-service-filter,
+  .admin-category-form,
+  .admin-bjn-filters,
+  .operations-filters,
+  .admin-bjn-setting-grid,
+  .admin-notice-form,
+  .admin-operation-detail,
+  .admin-auction-cancellation,
+  .admin-provider-detail
+) :is(input, select, textarea):focus {
+  border-color: var(--admin-accent);
+  outline: 3px solid rgb(0 100 255 / 13%);
+}
+
+.admin-layout :is(.admin-notice-form, .admin-operation-detail, .admin-auction-cancellation, .admin-provider-detail) textarea {
+  min-height: 96px;
+  padding-top: 11px;
+  padding-bottom: 11px;
+}
+
+/* 담당자 7: 관리자 상태 변경·판정 명령의 사유 입력 크기를 화면마다 동일하게 유지합니다. */
+.admin-layout textarea.admin-reason-textarea {
+  box-sizing: border-box;
+  height: 120px;
+  min-height: 120px;
+  overflow-y: auto;
+  resize: none;
+}
+
+.admin-layout .btn,
+.admin-layout :is(.admin-bjn-filters, .operations-filters) > button,
+.admin-layout .admin-dashboard__refresh {
+  display: inline-flex;
+  min-width: 0;
+  min-height: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border-radius: 9px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1;
+}
+
+.admin-layout :is(.admin-bjn-filters, .operations-filters) > button {
+  border: 1px solid var(--admin-accent);
+  background: var(--admin-accent);
+  color: #fff;
+}
+
+.admin-layout .admin-filter-actions {
+  display: flex;
+  align-self: end;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-layout .admin-filter-actions .btn {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.admin-layout .btn-primary {
+  border: 1px solid var(--admin-accent);
+  background: var(--admin-accent);
+  color: #fff;
+}
+
+.admin-layout .btn-primary:hover,
+.admin-layout :is(.admin-bjn-filters, .operations-filters) > button:hover {
+  border-color: var(--admin-accent-dark);
+  background: var(--admin-accent-dark);
+  opacity: 1;
+}
+
+.admin-layout .btn-outline {
+  border: 1px solid #b8cdf5;
+  background: #fff;
+  color: var(--admin-accent-dark);
+}
+
+.admin-layout .btn-outline:hover {
+  border-color: #8db5f8;
+  background: var(--admin-accent-soft);
+  opacity: 1;
+}
+
+.admin-layout .btn-danger {
+  border: 1px solid #e63946;
+}
+
+.admin-layout :is(.btn, button):disabled {
+  cursor: not-allowed;
+  opacity: .55;
+}
+
+.admin-layout :is(.admin-bjn-table-scroll, .admin-table-scroll, .operations-table-wrap) {
+  overflow-x: auto;
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  background: var(--admin-surface);
+  box-shadow: var(--admin-shadow);
+}
+
+.admin-layout .admin-section-card :is(.admin-bjn-table-scroll, .admin-table-scroll, .operations-table-wrap) {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.admin-layout :is(.admin-table, .operations-table) {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--admin-text);
+  font-size: 14px;
+}
+
+.admin-layout :is(.admin-table, .operations-table) th {
+  height: 46px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--admin-border);
+  background: var(--admin-surface-subtle);
+  color: #475569;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.4;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.admin-layout :is(.admin-table, .operations-table) td {
+  min-height: 52px;
+  padding: 14px;
+  border-bottom: 1px solid #edf0f4;
+  color: #273244;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.admin-layout :is(.admin-table, .operations-table) tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.admin-layout :is(.admin-table, .operations-table) tbody tr:hover {
+  background: #f8fbff;
+}
+
+.admin-layout .admin-notice-list__title,
+.admin-layout .operations-table__content {
+  text-align: left !important;
+  white-space: normal !important;
+}
+
+.admin-layout :is(.admin-content-state, .admin-bjn-state) {
+  border-radius: var(--admin-radius);
+  color: var(--admin-text-muted);
+  font-size: 14px;
+}
+
+.admin-layout :is(.admin-content-state, .admin-bjn-state).is-error {
+  border: 1px solid #fecaca;
+  background: #fff7f7;
+  color: #b42318;
+}
+
+.admin-layout .admin-bjn-setting-form {
+  gap: 18px;
+}
+
+.admin-layout .admin-operation-page {
+  gap: 0;
+}
+
+.admin-layout .admin-operation-page > :is(.admin-operation-error, .admin-operation-validation) {
+  margin-bottom: 18px;
+}
+
+.admin-layout .admin-bjn-setting-section {
+  padding: 20px;
+}
+
+.admin-layout .admin-bjn-setting-section h3 {
+  margin-bottom: 16px;
+  color: var(--admin-text);
+  font-size: 17px;
+}
+
+.admin-layout .admin-noti-grid {
+  gap: 16px;
+}
+
+.admin-layout .admin-noti-group {
+  padding: 20px;
+}
+
+.admin-layout .admin-noti-card {
+  border-color: var(--admin-border);
+  border-radius: 10px;
+  background: var(--admin-surface-subtle);
+}
+
+.admin-layout .admin-noti-card.is-clickable:hover {
+  border-color: #9abaf4;
+  background: var(--admin-accent-soft);
+}
+
+@media (max-width: 820px) {
+  .admin-layout .admin-page-header {
+    align-items: flex-start;
+  }
+
+  .admin-layout .admin-page-header h1 {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 620px) {
+  .admin-layout :is(
+    .admin-notice-filters,
+    .admin-provider-filter,
+    .admin-service-filter,
+    .admin-category-form,
+    .admin-bjn-filters,
+    .operations-filters
+  ) {
+    padding: 15px;
+  }
+
+  .admin-layout .admin-filter-actions {
+    width: 100%;
+  }
+
+  .admin-layout .admin-filter-actions .btn {
+    flex: 1 1 0;
+  }
+}

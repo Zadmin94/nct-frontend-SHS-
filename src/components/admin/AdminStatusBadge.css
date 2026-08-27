@@ -1,0 +1,15 @@
+.admin-badge {
+  width: fit-content;
+  flex: 0 0 auto;
+  height: 30px;
+  justify-content: center;
+  box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: var(--ui-radius-sm, 5px);
+  padding: 0 10px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+  vertical-align: middle;
+}

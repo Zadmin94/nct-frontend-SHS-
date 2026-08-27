@@ -1,0 +1,68 @@
+/* 담당자 7: 관리자 목록 표의 기본 정렬과 로딩 표현을 통일합니다. */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* 담당자 7: 긴 제목·내용은 한 줄 말줄임으로 제한해 표 너비와 행 높이를 유지합니다. */
+.admin-table td.admin-table__long-text {
+  width: 32%;
+  max-width: 420px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap !important;
+}
+
+/* 회원 표시·카테고리처럼 길어질 수 있는 보조 열은 폭 비율을 바꾸지 않고 말줄임합니다. */
+.admin-table td.admin-table__compact-text {
+  max-width: 240px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap !important;
+}
+
+/* 처리 여부와 관계없이 목록의 날짜 열 폭을 일정하게 유지합니다. */
+.admin-table td.admin-table__processed-date {
+  width: 156px;
+  min-width: 156px;
+  max-width: 156px;
+  white-space: nowrap;
+}
+
+.admin-table__ellipsis-content {
+  display: block;
+  min-width: 0;
+  margin-inline: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-table td.admin-table__long-text > .admin-table__ellipsis-content {
+  max-width: 420px;
+}
+
+.admin-table td.admin-table__compact-text > .admin-table__ellipsis-content {
+  max-width: 240px;
+}
+
+.admin-table--loading tbody {
+  opacity: 0;
+  animation: admin-table-skeleton-reveal 0s linear 250ms forwards;
+}
+
+.admin-table--loading td .react-loading-skeleton {
+  vertical-align: middle;
+}
+
+@keyframes admin-table-skeleton-reveal {
+  to { opacity: 1; }
+}

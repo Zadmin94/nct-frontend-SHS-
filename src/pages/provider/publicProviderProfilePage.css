@@ -1,0 +1,116 @@
+/* 담당자 7 · F-COM-002/F-COM-015: 공통 제공자 프로필을 수정하지 않고 공개 화면의 깊이만 보강합니다. */
+.provider-public-page {
+  padding-top: 40px;
+}
+
+.provider-public-page .provider-public-card,
+.provider-public-page .provider-public-content {
+  border-color: #e4e7ec;
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.provider-public-page .provider-public-card {
+  padding: 30px;
+  background: #fff;
+}
+
+.provider-public-page .provider-public-content {
+  min-height: 0;
+  padding: 32px;
+  background: #fff;
+}
+
+.provider-public-page .provider-public-layout {
+  flex: none;
+  grid-template-columns: 310px minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+}
+
+.provider-public-page .provider-public-avatar {
+  margin-bottom: 22px;
+}
+
+.provider-public-page .provider-public-rating {
+  margin: 12px 0 14px;
+}
+
+.provider-public-page .provider-public-tags {
+  margin-bottom: 14px;
+}
+
+.provider-public-page .provider-public-stats {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.provider-public-page .provider-public-card section {
+  margin-top: 28px;
+  padding-top: 24px;
+}
+
+.provider-public-page .provider-public-tabs {
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.provider-public-page .provider-public-tabs button {
+  padding: 0 0 13px;
+}
+
+.provider-public-page .provider-panel-empty {
+  margin: 0;
+  padding: 72px 20px;
+}
+
+.provider-public-page .provider-public-tabs button {
+  transition: color 160ms ease, border-color 160ms ease, background-color 160ms ease;
+}
+
+.provider-public-page .provider-public-tabs button:hover {
+  color: #0057dc;
+  background: #f7faff;
+}
+
+.provider-public-page .provider-review-list article,
+.provider-public-page .provider-portfolio-grid > button {
+  border-color: #e4e7ec;
+  border-radius: 8px;
+  box-shadow: none;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.provider-public-page .provider-review-list article:hover,
+.provider-public-page .provider-portfolio-grid > button:hover {
+  border-color: #9bbcf2;
+  background: #f8fbff;
+}
+
+@media (max-width: 960px) {
+  .provider-public-page .provider-public-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 680px) {
+  .provider-public-page {
+    padding-top: 34px;
+  }
+
+  .provider-public-page .provider-public-card,
+  .provider-public-page .provider-public-content {
+    border-radius: 8px;
+    padding: 22px 18px;
+  }
+
+  .provider-public-page .provider-public-tabs {
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+
+  .provider-public-page .provider-panel-empty {
+    padding: 56px 18px;
+  }
+}

@@ -1,0 +1,135 @@
+.service-trade-detail-skeleton {
+  display: grid;
+  gap: 20px;
+  width: 100%;
+  min-width: 0;
+  opacity: 0;
+  animation: service-trade-detail-skeleton-reveal 0s linear 180ms forwards;
+}
+
+.service-trade-detail-skeleton__header {
+  min-height: 42px;
+}
+
+.service-trade-detail-skeleton__steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0 0 4px;
+  padding: 4px 8px;
+  list-style: none;
+}
+
+.service-trade-detail-skeleton__step {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+.service-trade-detail-skeleton__step:not(:last-child)::after {
+  position: absolute;
+  z-index: 0;
+  top: 12px;
+  left: calc(50% + 13px);
+  width: calc(100% - 26px);
+  height: 2px;
+  background: #e3e7ee;
+  content: '';
+}
+
+.service-trade-detail-skeleton__step > span {
+  position: relative;
+  z-index: 1;
+}
+
+.service-trade-detail-skeleton__cards {
+  align-items: stretch;
+}
+
+.service-trade-detail-skeleton__card {
+  display: grid;
+  align-content: start;
+  gap: 18px;
+  min-width: 0;
+}
+
+.service-trade-detail-skeleton__block + .service-trade-detail-skeleton__block {
+  padding-top: 18px;
+  border-top: 1px solid #ebeff5;
+}
+
+.service-trade-detail-skeleton__block {
+  display: grid;
+  gap: 14px;
+}
+
+.service-trade-detail-skeleton__title-row {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.service-trade-detail-skeleton__detail-row {
+  display: grid;
+  grid-template-columns: minmax(72px, .72fr) minmax(0, 1.28fr);
+  align-items: center;
+  gap: 12px;
+  min-height: 30px;
+}
+
+.service-trade-detail-skeleton__profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.service-trade-detail-skeleton__profile > div {
+  display: grid;
+  gap: 8px;
+}
+
+.service-trade-detail-skeleton__history {
+  display: grid;
+  gap: 18px;
+  min-height: 130px;
+}
+
+.service-trade-detail-skeleton__history-lines {
+  display: grid;
+  gap: 10px;
+  padding-top: 18px;
+  border-top: 1px solid #ebeff5;
+}
+
+@keyframes service-trade-detail-skeleton-reveal {
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-trade-detail-skeleton {
+    opacity: 1;
+    animation: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .service-trade-detail-skeleton {
+    gap: 16px;
+  }
+
+  .service-trade-detail-skeleton__header {
+    min-height: 36px;
+  }
+
+  .service-trade-detail-skeleton__steps {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .service-trade-detail-skeleton__step:nth-child(2) .react-loading-skeleton:last-child {
+    max-width: 56px;
+  }
+}

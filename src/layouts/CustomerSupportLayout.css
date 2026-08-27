@@ -1,0 +1,6 @@
+/* 담당자 7 | F-COM-013/F-COM-014: 메뉴·간격은 MyPageSidebar와 마이페이지 container를 직접 재사용합니다. */
+.customer-support-layout__content > .content-page {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}

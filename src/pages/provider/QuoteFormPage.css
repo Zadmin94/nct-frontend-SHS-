@@ -1,0 +1,371 @@
+/* QuoteFormPage 반응형 레이아웃 */
+
+/* 단일 컬럼 레이아웃 */
+.qf-simple-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+/* 2열 가로 배치 */
+.qf-row-2col {
+  display: grid;
+  gap: 16px;
+}
+
+.qf-row-2col.title-amount {
+  grid-template-columns: 2fr 1fr;
+}
+
+.qf-row-2col.content-attach {
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+}
+
+/* 수정가능정보(좌 50%) + 첨부파일(우 50%) */
+.qf-main-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.qf-col-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 첫 번째 필드(내용)가 우측 컬럼의 남은 세로 공간을 채운다 */
+.qf-col-right .qf-field:first-child {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.qf-col-right .qf-field:first-child textarea {
+  flex: 1;
+}
+
+.qf-col-right {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Desktop: 좌(제목·금액·내용) / 우(첨부파일·수정가능정보) */
+@media (min-width: 769px) {
+  .qf-main-2col {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+
+  .qf-col-left {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .qf-col-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+/* 우측 컬럼 썸네일 그리드 — 5열 1행 */
+.qf-col-right .qf-thumb-grid {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+/* 서비스 요청 정보 카드 */
+.qf-req-info-card {
+  padding: 14px 16px;
+}
+
+/* 필드 블록 */
+.qf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.qf-field label {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+}
+
+.qf-field-hint {
+  font-size: 15px;
+  font-weight: 400;
+  color: #969696;
+  margin-left: 6px;
+}
+
+/* 썸네일 업로드 래퍼 */
+.qf-thumb-wrap {
+}
+
+
+.qf-thumb-hint {
+  font-size: 12px;
+  color: #888780;
+  margin: 0;
+}
+
+/* 썸네일 그리드 — 5열 */
+.qf-thumb-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+/* 파일이 있는 슬롯 */
+.qf-thumb-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.qf-thumb-img {
+  aspect-ratio: 1;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e2e1dc;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* 이미지가 아닌 파일 (PDF 등) */
+.qf-thumb-file {
+  aspect-ratio: 1;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #e2e1dc;
+  background: #f0f0ed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qf-thumb-ext {
+  font-size: 11px;
+  font-weight: 700;
+  color: #5f5e5a;
+  letter-spacing: 0.5px;
+}
+
+/* 삭제 버튼 */
+.qf-thumb-del {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #1a1a18;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+/* 파일명 / 다운로드 영역 */
+.qf-thumb-name {
+  font-size: 10px;
+  color: #888;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* 다운로드 링크/버튼 스타일 */
+.qf-thumb-dl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #0064ff;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.qf-thumb-dl:hover {
+  color: #0048bf;
+  text-decoration: underline;
+}
+
+/* 빈 슬롯 */
+.qf-thumb-empty {
+  aspect-ratio: 1;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px dashed #d8d6cf;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.qf-thumb-empty:hover {
+  border-color: #0064ff;
+}
+
+.qf-thumb-empty span {
+  font-size: 20px;
+  color: #c7c5bd;
+}
+
+/* 정책 박스 */
+.qf-policy-wrap {
+  border-radius: 10px;
+  background: #e5efff;
+  border: 1px solid #c8d8f5;
+  padding: 16px;
+}
+
+.qf-policy-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.qf-policy-head h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #0048bf;
+  flex-shrink: 0;
+}
+
+.qf-policy-head span {
+  font-size: 15px;
+  color: #4e4e4e;
+}
+
+.qf-policy-remain {
+  font-size: 15px;
+  margin: 0 0 10px;
+}
+
+.qf-policy-list {
+  padding-left: 18px;
+  list-style: disc;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0 0 10px;
+}
+
+.qf-policy-list li {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #1d1d1f;
+}
+
+.qf-no-history {
+  font-size: 14px;
+  color: #969696;
+  margin: 0 0 10px;
+}
+
+/* 수정 이력 카드 */
+.qf-history-card {
+  background: #fff;
+  border-radius: 8px;
+  border: 0.5px solid #c8d8f5;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+}
+
+.qf-history-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+/* 정책 동의 체크박스 */
+.qf-policy-agree {
+  border-radius: 8px;
+  border: 0.5px solid #c8d8f5;
+  background: #fff;
+  padding: 10px 14px;
+}
+
+.qf-policy-agree label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #1d1d1f;
+  cursor: pointer;
+}
+
+.qf-policy-agree input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+/* 견적 미리보기 전용 모달: 결과·확인 알림은 공통 FeedbackDialog를 사용합니다. */
+.qf-preview-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qf-preview-modal-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 36px 40px;
+  width: 90%;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.18);
+}
+
+@media (max-width: 768px) {
+  .qf-main-2col {
+    grid-template-columns: 1fr;
+  }
+
+  .qf-thumb-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .qf-preview-modal-box {
+    padding: 28px 24px;
+  }
+
+  .qf-history-card {
+    padding: 10px;
+    border-radius: 10px;
+  }
+}

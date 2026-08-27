@@ -1,0 +1,113 @@
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #0b4fcc;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.brand-logo__mark {
+  position: relative;
+  display: block;
+  width: 38px;
+  height: 38px;
+  overflow: hidden;
+  flex: 0 0 38px;
+  border-radius: 9px;
+  background: #fff;
+}
+
+/* 임시 원본의 심볼 위치에 맞춘 화면용 crop이다. 원본 파일 자체는 변경하지 않는다. */
+.brand-logo__mark img {
+  position: absolute;
+  top: -17.3px;
+  left: -28.5px;
+  width: 95px;
+  height: 95px;
+  max-width: none;
+}
+
+.brand-logo__name {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.brand-logo__name small {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0;
+  opacity: 0.72;
+}
+
+.brand-logo--admin {
+  color: #fff;
+}
+
+.brand-logo--admin .brand-logo__mark {
+  width: 28px;
+  height: 28px;
+  flex-basis: 28px;
+  border-radius: 7px;
+}
+
+.brand-logo--admin .brand-logo__mark img {
+  top: -12.7px;
+  left: -21px;
+  width: 70px;
+  height: 70px;
+}
+
+.brand-logo--admin .brand-logo__name {
+  font-size: 16px;
+}
+
+.brand-logo--auth .brand-logo__mark {
+  width: 46px;
+  height: 46px;
+  flex-basis: 46px;
+  border-radius: 11px;
+}
+
+.brand-logo--auth .brand-logo__mark img {
+  top: -21px;
+  left: -34.5px;
+  width: 115px;
+  height: 115px;
+}
+
+.brand-logo--auth .brand-logo__name {
+  font-size: 30px;
+}
+
+.brand-logo--footer {
+  color: #fff;
+}
+
+.brand-logo--footer .brand-logo__mark {
+  width: 30px;
+  height: 30px;
+  flex-basis: 30px;
+  border-radius: 7px;
+}
+
+.brand-logo--footer .brand-logo__mark img {
+  top: -13.7px;
+  left: -22.5px;
+  width: 75px;
+  height: 75px;
+}
+
+.brand-logo--footer .brand-logo__name {
+  font-size: 18px;
+}
+
+@media (max-width: 640px) {
+  .brand-logo__name {
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,104 @@
+.customer-inquiry-form-page {
+  --inquiry-ink: #17223b;
+  --inquiry-muted: #667085;
+  --inquiry-line: #dfe6f1;
+  --inquiry-blue: #1466f5;
+}
+
+.customer-inquiry-form {
+  display: grid;
+  gap: 22px;
+  border: 1px solid var(--inquiry-line);
+  border-radius: 18px;
+  padding: 28px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgb(16 24 40 / 5%);
+}
+
+.customer-inquiry-form__heading {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #edf0f5;
+}
+
+.customer-inquiry-form__heading > span {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 13px;
+  background: #eaf1ff;
+  color: var(--inquiry-blue);
+}
+
+.customer-inquiry-form__heading svg { width: 22px; }
+.customer-inquiry-form__heading h2 { margin: 0; color: var(--inquiry-ink); font-size: 20px; }
+.customer-inquiry-form__heading p { margin: 4px 0 0; color: var(--inquiry-muted); font-size: 14px; }
+
+.customer-inquiry-form > label {
+  position: relative;
+  display: grid;
+  gap: 8px;
+  color: #344054;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.customer-inquiry-form input,
+.customer-inquiry-form select,
+.customer-inquiry-form textarea {
+  width: 100%;
+  border: 1px solid #cfd7e6;
+  border-radius: 11px;
+  padding: 12px 14px;
+  background: #fff;
+  color: var(--inquiry-ink);
+  font: inherit;
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.customer-inquiry-form select { height: 48px; }
+.customer-inquiry-form textarea { min-height: 210px; resize: vertical; padding-bottom: 34px; }
+.customer-inquiry-form input:focus,
+.customer-inquiry-form select:focus,
+.customer-inquiry-form textarea:focus { border-color: var(--inquiry-blue); outline: 3px solid rgb(20 102 245 / 13%); }
+.customer-inquiry-form [aria-invalid="true"] { border-color: #e34850; }
+.customer-inquiry-form small { color: #c72c35; font-size: 13px; font-weight: 600; }
+.customer-inquiry-form small button { margin-left: 7px; border: 0; background: transparent; color: var(--inquiry-blue); font-weight: 800; text-decoration: underline; cursor: pointer; }
+
+.customer-inquiry-form__counter {
+  position: absolute;
+  right: 12px;
+  bottom: 11px;
+  color: #98a2b3;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.customer-inquiry-form__notice {
+  display: flex;
+  gap: 11px;
+  border: 1px solid #bfd4ff;
+  border-radius: 12px;
+  padding: 15px;
+  background: #f3f7ff;
+  color: #31558d;
+}
+
+.customer-inquiry-form__notice svg { width: 20px; flex: 0 0 auto; }
+.customer-inquiry-form__notice p { display: grid; gap: 3px; margin: 0; font-size: 13px; line-height: 1.55; }
+.customer-inquiry-form__notice strong { color: #173c78; }
+.customer-inquiry-form__error { margin: 0; border-radius: 10px; padding: 12px 14px; background: #fff1f2; color: #b42318; font-size: 14px; }
+.customer-inquiry-form__actions { display: flex; justify-content: flex-end; gap: 10px; }
+.customer-inquiry-form__actions .btn,
+.customer-inquiry-form__actions .ui-action-button { min-width: 128px; }
+
+@media (max-width: 640px) {
+  .customer-inquiry-form { padding: 20px 16px; }
+  .customer-inquiry-form__actions { display: grid; grid-template-columns: 1fr 1fr; }
+  .customer-inquiry-form__actions .btn,
+  .customer-inquiry-form__actions .ui-action-button { min-width: 0; }
+}

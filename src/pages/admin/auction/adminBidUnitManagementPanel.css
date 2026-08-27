@@ -1,0 +1,139 @@
+.admin-bid-unit-panel__summary,
+.admin-bid-unit-actions,
+.admin-bid-unit-form__actions,
+.admin-bid-unit-panel__summary .btn,
+.admin-bid-unit-actions .btn {
+  display: flex;
+  align-items: center;
+}
+
+.admin-bid-unit-panel__summary {
+  gap: 14px;
+}
+
+.admin-bid-unit-panel__summary > span {
+  color: #65708a;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.admin-bid-unit-panel__summary .btn,
+.admin-bid-unit-actions .btn {
+  justify-content: center;
+  gap: 6px;
+}
+
+.admin-bid-unit-panel__summary svg,
+.admin-bid-unit-actions svg {
+  width: 16px;
+  height: 16px;
+}
+
+.admin-bid-unit-actions {
+  justify-content: center;
+  gap: 7px;
+}
+
+.admin-bid-unit-actions .btn {
+  min-height: 38px;
+  padding: 0 11px;
+  white-space: nowrap;
+}
+
+.admin-bid-unit-actions__deactivate {
+  color: #b42318;
+}
+
+.admin-bid-unit-panel__feedback {
+  margin: 0 0 12px;
+  padding: 11px 13px;
+  border-radius: 8px;
+  background: #fff1f0;
+  color: #b42318;
+  font-weight: 700;
+}
+
+.admin-bid-unit-form {
+  display: grid;
+  gap: 18px;
+}
+
+.admin-bid-unit-form label:not(.admin-bid-unit-form__check) {
+  display: grid;
+  gap: 8px;
+}
+
+.admin-bid-unit-form label > span,
+.admin-bid-unit-form__code > span {
+  color: #5f6678;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.admin-bid-unit-form input[type='number'],
+.admin-bid-unit-form textarea {
+  width: 100%;
+  border: 1px solid #d6dae3;
+  border-radius: 8px;
+  background: #fff;
+  color: #1a1a18;
+  font: inherit;
+}
+
+.admin-bid-unit-form input[type='number'] {
+  min-height: 44px;
+  padding: 0 13px;
+}
+
+.admin-bid-unit-form textarea {
+  min-height: 92px;
+  padding: 11px 13px;
+  resize: vertical;
+}
+
+.admin-bid-unit-form input:focus,
+.admin-bid-unit-form textarea:focus {
+  border-color: var(--color-primary, #0064ff);
+  outline: 3px solid rgb(0 100 255 / 14%);
+}
+
+.admin-bid-unit-form__code {
+  display: grid;
+  gap: 5px;
+  padding: 14px 16px;
+  border: 1px solid #dbe6f8;
+  border-radius: 8px;
+  background: #f6f9ff;
+}
+
+.admin-bid-unit-form__code strong {
+  color: #1f274c;
+  font-size: 16px;
+}
+
+.admin-bid-unit-form__feedback {
+  margin: 0;
+  padding: 11px 13px;
+  border-radius: 8px;
+  background: #fff1f0;
+  color: #b42318;
+  font-weight: 700;
+}
+
+.admin-bid-unit-form__actions {
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+@media (max-width: 760px) {
+  .admin-bid-unit-panel__summary {
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .admin-bid-unit-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

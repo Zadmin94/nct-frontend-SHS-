@@ -1,0 +1,1371 @@
+.trade-detail-page {
+  min-height: 100%;
+  padding: 24px 0 48px;
+  background: transparent;
+}
+
+.trade-detail-page__content {
+  width: 100%;
+  min-width: 0;
+}
+
+/* 정식 경매 거래 상세은 전역 container 안에서 본문과 리뷰를 한 화면으로 조립한다.
+   @ai_generated (담당자1, 2026-08-07): 리뷰를 오른쪽 380px 사이드바로 분리해뒀던 걸
+   되돌렸다 - 두 영역이 시각적으로 별개로 보인다는 지적에 따라, 좌우 분할 없이 제목·진행바·
+   카드 그리드·거래 리뷰가 전부 하나의 세로 영역으로 이어지게 한다. */
+.auction-trade-detail-shell {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  padding-top: 24px;
+}
+
+/* 앱 전반의 .container(py-6 lg:py-10 = 24px→40px) 상단 여백 관례에 맞춘다 -
+   이 페이지만 고정 24px을 써서 다른 상세 페이지들보다 위쪽이 좁아 보였다. */
+@media (min-width: 1024px) {
+  .auction-trade-detail-shell { padding-top: 40px; }
+}
+
+.auction-trade-detail-shell > .trade-detail-page {
+  min-width: 0;
+}
+
+.auction-trade-detail-shell__review {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.trade-detail-page__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.trade-detail-page__header h1 {
+  margin: 0;
+  color: #171b26;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -1.2px;
+}
+
+.trade-detail-page__header p {
+  margin: 6px 0 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.trade-detail-page__status {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.trade-detail-page__header .btn {
+  min-height: 42px;
+  padding: 0 16px;
+  background: rgba(255, 255, 255, .82);
+}
+
+.trade-detail-page__header .ui-action-button {
+  padding-inline: 16px;
+}
+
+/* @ai_generated (담당자1, 2026-08-07): 기존 trade-progress(테두리 박스 안 알약형 탭)를
+   대체하는 새 디자인 - 서비스 거래 상세의 번호+체크마크 스테퍼(service-trade-progress)와
+   목적은 같지만(진행 단계를 읽기전용으로 보여줌) 두 기존 스타일 어느 쪽과도 겹치지 않도록,
+   박스 테두리 없이 원형 마커 + 연결선으로 구성했다. 색상은 프로젝트 공통 --color-primary와
+   badge-outline 계열 회색(#8b95a7, App.css의 badge-outline-gray 계열)을 그대로 썼다. */
+.trade-stepper {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  margin: 0 0 16px;
+  padding: 4px 8px;
+  list-style: none;
+}
+
+.trade-stepper__item {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+/* 마커 사이 연결선. 지나간 구간은 primary색, 아직 안 온 구간은 회색. */
+.trade-stepper__item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 13px;
+  left: calc(50% + 13px);
+  width: calc(100% - 26px);
+  height: 2px;
+  background: #dce2ed;
+  z-index: 0;
+}
+
+.trade-stepper__item--done:not(:last-child)::after {
+  background: var(--color-primary, #0064ff);
+}
+
+.trade-stepper__marker {
+  position: relative;
+  z-index: 1;
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  border-radius: 50%;
+  border: 1.5px solid #cdd5e0;
+  background: #fff;
+  color: #8b95a7;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.trade-stepper__label {
+  color: #8b95a7;
+  font-size: 13px;
+  font-weight: 600;
+  /* @ai_generated (담당자1, 2026-08-07): line-height를 폰트 기본값에 맡기지 않고 고정한다 -
+     .trade-stepper 전체 높이(74px = padding 4+4 + marker 26 + gap 6 + 이 줄 18 + margin-bottom 16)
+     를 정확히 계산해 .auction-trade-detail-shell__review의 여백과 맞추기 위함이다. */
+  line-height: 18px;
+}
+
+.trade-stepper__item--done .trade-stepper__marker {
+  border-color: var(--color-primary, #0064ff);
+  background: var(--color-primary, #0064ff);
+  color: #fff;
+}
+
+.trade-stepper__item--done .trade-stepper__label {
+  color: #4b5565;
+}
+
+.trade-stepper__item--current .trade-stepper__marker {
+  border-color: var(--color-primary, #0064ff);
+  background: #fff;
+  color: var(--color-primary, #0064ff);
+  box-shadow: 0 0 0 4px rgba(0, 100, 255, .15);
+}
+
+.trade-stepper__item--current .trade-stepper__label {
+  color: var(--color-primary, #0064ff);
+  font-weight: 800;
+}
+
+/* @ai_generated (담당자1, 2026-08-07): 카드 개수 조건부(:has())로 뒀던 걸 걷어내고
+   trade-detail-grid는 항상 3열 균등폭으로 고정한다. */
+.trade-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.trade-address-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.trade-address-grid {
+  gap: 12px;
+  align-items: start;
+}
+
+.trade-detail-card {
+  padding: 20px;
+  border: 1px solid #dce2ed;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: none;
+}
+
+.trade-detail-card h2 {
+  margin: 0 0 16px;
+  color: #252b3a;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -.3px;
+}
+
+.trade-detail-card p {
+  margin: 8px 0;
+  color: #5e687b;
+  line-height: 1.6;
+}
+
+.trade-detail-card__muted {
+  color: #8893a5 !important;
+  font-size: 13px;
+}
+
+/* 3열 그리드의 카드 3개(상품 정보/정보 섹션/상대방 정보 → 하나, 배송·진행·완료 → 하나)를
+   각각 한 trade-detail-card 안에 이어붙일 때 구획을 나누는 서브섹션. */
+.trade-detail-card__block + .trade-detail-card__block {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #ebebeb;
+}
+
+.trade-detail-card__block h3 {
+  margin: 0 0 12px;
+  color: #252b3a;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -.3px;
+}
+
+.trade-schedule-proposal-panel h4 {
+  margin: 0 0 12px;
+  color: #252b3a;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.trade-product {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.trade-product__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.trade-product__price {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  text-align: right;
+}
+
+.trade-product__price span {
+  color: #8893a5;
+  font-size: 13px;
+}
+
+.trade-product .trade-product__price strong {
+  color: var(--color-primary, #0064ff);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.trade-product__image {
+  display: flex;
+  width: 104px;
+  min-width: 104px;
+  height: 104px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid #dce6ff;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #dce8ff, #f7f9ff);
+  color: #4b6cae;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.trade-counterpart {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 4px;
+}
+
+.trade-counterpart__profile {
+  display: flex;
+  flex: 1 1 220px;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.trade-trust-score {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  color: #718098;
+  font-size: 14px;
+}
+
+.trade-trust-score svg {
+  fill: #ff9f1c;
+  color: #ff9f1c;
+}
+
+.trade-trust-score strong {
+  color: #ff9f1c;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.trade-trust-score__max {
+  color: #a2acbd;
+  font-size: 13px;
+}
+
+.trade-trust-score__reviews {
+  margin-left: 2px;
+  color: #718098;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.trade-trust-score--muted {
+  color: #a2acbd;
+}
+
+.trade-trust-score--muted svg {
+  fill: none;
+  color: #c9d1de;
+}
+
+.trade-counterpart__avatar {
+  display: flex;
+  width: 76px;
+  min-width: 76px;
+  height: 76px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid #dce6ff;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #dce8ff, #f7f9ff);
+  color: #4b6cae;
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.trade-counterpart__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.trade-counterpart p {
+  margin: 0;
+}
+
+.trade-product__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.trade-product strong {
+  display: block;
+  overflow: hidden;
+  color: #252b3a;
+  font-size: 20px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.trade-trust,
+.trade-notice,
+.trade-warning,
+.trade-auto-complete {
+  margin: 16px 0 0;
+  padding: 13px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.trade-trust,
+.trade-notice {
+  border: 1px solid #dbe7ff;
+  background: #f5f8ff;
+  color: #3e5f9b;
+}
+
+.trade-trust__score {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 0;
+  color: #4e607a;
+}
+
+.trade-trust__score strong {
+  color: #ff9f1c;
+}
+
+.trade-trust__score span {
+  color: #718098;
+  font-size: 13px;
+}
+
+.trade-trust__reviews {
+  display: grid;
+  gap: 10px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trade-trust__reviews li {
+  padding-top: 10px;
+  border-top: 1px solid #dbe7ff;
+}
+
+.trade-trust__reviews li > span {
+  color: #ff9f1c;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.trade-trust__reviews p {
+  margin: 4px 0;
+  color: #4e607a;
+}
+
+.trade-trust__reviews small {
+  color: #8893a5;
+}
+
+.trade-warning,
+.trade-auto-complete {
+  border: 1px solid #fde4b4;
+  background: #fff9ee;
+  color: #6d5a32;
+}
+
+.trade-complete-card {
+  margin-top: 18px;
+}
+
+/* 그리드 안의 진행 카드들은 같은 행을 채워 정보 카드와 높이·상단선을 맞춘다. */
+.trade-detail-grid > .trade-complete-card {
+  height: 100%;
+  margin-top: 0;
+}
+
+.trade-detail-page--seller .trade-detail-grid,
+.trade-detail-page--seller .trade-complete-card,
+.trade-detail-page--seller .trade-detail-page__header,
+.trade-detail-page--seller .trade-stepper,
+.trade-detail-page--buyer .trade-detail-grid,
+.trade-detail-page--buyer .trade-complete-card,
+.trade-detail-page--buyer .trade-detail-page__header,
+.trade-detail-page--buyer .trade-stepper {
+  width: 100%;
+  max-width: 1040px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.trade-detail-page--seller .trade-stepper,
+.trade-detail-page--buyer .trade-stepper {
+  margin-bottom: 16px;
+}
+
+/* @ai_generated (담당자1, 2026-08-13): 거래 상세 로딩 전용 표현이다.
+   실제 거래 상세와 서비스 거래 상세가 공유하는 레이아웃 규칙은 변경하지 않는다. */
+.trade-detail-skeleton__header {
+  min-height: 42px;
+}
+
+.trade-detail-skeleton__stepper .trade-stepper__item:not(:last-child)::after {
+  background: #dce2ed;
+}
+
+.trade-detail-skeleton__step-label {
+  margin-top: 6px;
+}
+
+.trade-detail-skeleton__card {
+  min-width: 0;
+  min-height: 390px;
+  padding: 24px;
+  border: 1px solid #e5eaf3;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.trade-detail-skeleton__media {
+  margin-top: 20px;
+  border-radius: 12px;
+}
+
+.trade-detail-skeleton__lines {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.trade-detail-skeleton__action {
+  margin-top: 24px;
+  border-radius: 10px;
+}
+
+/* 정식 통합 경로에서는 왼쪽 그리드 열 전체를 사용한다. 기존 1040px 중앙 정렬보다 뒤에서 적용한다. */
+.auction-trade-detail-shell .trade-detail-page__header,
+.auction-trade-detail-shell .trade-stepper,
+.auction-trade-detail-shell .trade-detail-grid,
+.auction-trade-detail-shell .trade-complete-card {
+  max-width: none;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.trade-success {
+  margin: 14px 0;
+  color: #0048bf !important;
+  font-weight: 700;
+}
+
+.trade-auto-complete p {
+  margin: 4px 0 0;
+  font-size: 14px;
+}
+
+.trade-meeting-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+
+.trade-meeting-summary > div {
+  padding: 13px 14px;
+  border: 1px solid #e5eaf3;
+  border-radius: 10px;
+  background: #fbfcfe;
+}
+
+.trade-meeting-summary__memo {
+  grid-column: 1 / -1;
+}
+
+.trade-meeting-summary dt {
+  color: #778197;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.trade-meeting-summary dd {
+  margin: 6px 0 0;
+  color: #252b3a;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.trade-schedule-picker-field {
+  position: relative;
+}
+
+.trade-schedule-picker-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+}
+
+.trade-schedule-picker-trigger svg { color: #667085; }
+
+.trade-schedule-date-picker {
+  position: absolute;
+  z-index: 5;
+  top: calc(100% + 7px);
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 12px 24px rgb(16 24 40 / 16%);
+}
+
+.trade-schedule-date-picker .date-picker-second-month-group,
+.trade-schedule-date-picker .date-picker-second-month-label { display: none; }
+
+.trade-complete-card__check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 13px;
+  border: 1px solid #e2e7f0;
+  border-radius: 10px;
+  background: #fbfcfe;
+  color: #4b5565;
+  font-size: 14px;
+}
+
+.trade-complete-card__check input {
+  width: 17px;
+  height: 17px;
+  accent-color: #155eef;
+}
+
+.trade-detail-actions,
+.trade-modal__actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.trade-detail-actions--end {
+  justify-content: flex-end;
+}
+
+.trade-detail-actions .btn,
+.trade-modal__actions .btn {
+  min-height: 44px;
+  padding: 0 18px;
+  font-weight: 700;
+}
+
+.trade-detail-actions .ui-action-button,
+.trade-modal__actions .ui-action-button {
+  font-weight: 700;
+}
+
+.trade-counterpart__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.trade-counterpart__heading h3 { margin: 0; }
+
+.trade-counterpart__heading .btn {
+  min-height: 32px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+
+.trade-modal__actions {
+  justify-content: flex-end;
+}
+
+.trade-status {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.trade-status--progress {
+  background: #e8f0fe;
+  color: #1a56a4;
+}
+
+.trade-status--pending {
+  background: #faeeda;
+  color: #ba7517;
+}
+
+.trade-status--complete {
+  background: #e7f8f0;
+  color: #137c4b;
+}
+
+.trade-status--problem {
+  background: #fcebeb;
+  color: #a32d2d;
+}
+
+.trade-status--canceled {
+  background: #f2f4f7;
+  color: #667085;
+}
+
+.trade-modal {
+  position: fixed;
+  z-index: 200;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(16, 24, 40, .48);
+  backdrop-filter: blur(3px);
+}
+
+.trade-modal__content {
+  width: min(560px, 100%);
+  padding: 26px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 24px 80px rgba(16, 24, 40, .28);
+}
+
+.trade-modal__content > p {
+  margin: 0 0 18px;
+  color: #5f5e5a;
+  font-size: 14px;
+}
+
+.trade-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.trade-modal__header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.trade-modal__close {
+  border: 0;
+  background: transparent;
+  color: #5f5e5a;
+  cursor: pointer;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.trade-form-field {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+  color: #4b5565;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.trade-form-field .input {
+  min-height: 46px;
+  border-color: #dce2ed;
+  border-radius: 10px;
+  color: #252b3a;
+  font-weight: 500;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.trade-form-field .input:focus { border-color: #155eef; box-shadow: 0 0 0 4px rgba(21, 94, 239, .12); }
+.trade-form-field .input[readonly] { background: #f8fafc; color: #697586; }
+.trade-form-field__textarea { min-height: 128px; padding: 12px; resize: vertical; }
+.trade-form-field__count {
+  color: #8b95a7;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: right;
+}
+
+.trade-time-slots-field {
+  position: relative;
+  min-width: 0;
+  margin: 16px 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.trade-date-picker-field {
+  position: relative;
+  min-width: 0;
+  margin: 16px 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.trade-date-picker-field legend {
+  margin-bottom: 8px;
+  color: #475467;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.trade-date-picker-trigger {
+  display: flex;
+  width: 100%;
+  min-height: 46px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  border: 1px solid #dce2ed;
+  border-radius: 10px;
+  background: #fff;
+  color: #252b3a;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 500;
+}
+
+.trade-date-picker-trigger:hover:not(:disabled),
+.trade-date-picker-trigger[aria-expanded="true"] {
+  border-color: #155eef;
+  box-shadow: 0 0 0 4px rgba(21, 94, 239, .12);
+}
+
+.trade-date-picker-trigger:disabled {
+  background: #f8fafc;
+  color: #98a2b3;
+  cursor: not-allowed;
+}
+
+.trade-picker-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  color: #667085;
+}
+
+.trade-picker-icon svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.trade-date-picker {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 8px);
+  right: 0;
+  left: 0;
+  min-width: 304px;
+  padding: 16px;
+  border: 1px solid #dce2ed;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(20, 38, 79, .16);
+}
+
+.trade-date-picker__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  color: #252b3a;
+}
+
+.trade-date-picker__month-button {
+  display: inline-flex;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dce2ed;
+  border-radius: 8px;
+  background: #fff;
+  color: #475467;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.trade-date-picker__month-button:hover { border-color: #155eef; color: #155eef; }
+
+.trade-date-picker__weekdays,
+.trade-date-picker__days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+  text-align: center;
+}
+
+.trade-date-picker__weekdays { margin-bottom: 6px; color: #667085; font-size: 12px; font-weight: 700; }
+
+.trade-date-picker__day {
+  min-height: 36px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #344054;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.trade-date-picker__day:hover:not(:disabled) { background: #eaf0ff; color: #155eef; }
+.trade-date-picker__day--selected { background: #155eef; color: #fff; }
+.trade-date-picker__day:disabled { color: #c5cad3; cursor: not-allowed; }
+
+.trade-time-slots-field legend {
+  margin-bottom: 8px;
+  color: #475467;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.trade-time-slots__hint {
+  margin: 8px 0 0;
+  color: #8b95a7;
+  font-size: 13px;
+}
+
+.trade-time-picker-trigger {
+  display: flex;
+  width: 100%;
+  min-height: 46px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  border: 1px solid #dce2ed;
+  border-radius: 10px;
+  background: #fff;
+  color: #252b3a;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 500;
+}
+
+.trade-time-picker-trigger:hover:not(:disabled),
+.trade-time-picker-trigger[aria-expanded="true"] {
+  border-color: #155eef;
+  box-shadow: 0 0 0 4px rgba(21, 94, 239, .12);
+}
+
+.trade-time-picker-trigger:disabled {
+  background: #f8fafc;
+  color: #98a2b3;
+  cursor: not-allowed;
+}
+
+.trade-time-picker {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 8px);
+  right: 0;
+  left: 0;
+  padding: 14px;
+  border: 1px solid #dce2ed;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(20, 38, 79, .16);
+}
+
+.trade-time-picker > p {
+  margin: 0 0 10px;
+  color: #667085;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.trade-time-slots {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  max-height: 192px;
+  overflow-y: auto;
+  padding: 2px;
+}
+
+.trade-time-slot {
+  min-height: 38px;
+  border: 1px solid #dce2ed;
+  border-radius: 9px;
+  background: #fff;
+  color: #526079;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.trade-time-slot:hover:not(:disabled),
+.trade-time-slot--selected {
+  border-color: #155eef;
+  background: #e9f0ff;
+  color: #155eef;
+}
+
+.trade-time-slot:disabled {
+  cursor: not-allowed;
+  opacity: .55;
+}
+
+.trade-form-error { margin: 12px 0 0; color: #a32d2d; font-size: 13px; }
+
+.trade-proof-upload-area {
+  margin-top: 16px;
+}
+
+.trade-proof-upload-box {
+  overflow: hidden;
+  border: 1px dashed #b9c9eb;
+  border-radius: 14px;
+  background: #f8faff;
+}
+
+.trade-proof-list {
+  display: grid;
+  gap: 10px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trade-proof-list__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border: 1px solid #e3e9f5;
+  border-radius: 12px;
+  background: #fbfcff;
+}
+
+.trade-proof-list__item img {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.trade-proof-list__item div {
+  display: grid;
+  min-width: 0;
+  flex: 1;
+  gap: 4px;
+}
+
+.trade-proof-list__item strong {
+  overflow: hidden;
+  color: #344054;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.trade-proof-list__item span {
+  color: #16794c;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.trade-delivery-proof-gallery {
+  margin-top: 16px;
+}
+
+.trade-delivery-proof-gallery > strong {
+  color: #344054;
+  font-size: 13px;
+}
+
+.trade-delivery-proof-gallery > div {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.trade-delivery-proof-gallery__item {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.trade-delivery-proof-gallery img {
+  width: 100%;
+  aspect-ratio: 1;
+  border: 1px solid #e3e9f5;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.trade-proof-upload {
+  display: grid;
+  min-height: 128px;
+  place-content: center;
+  gap: 7px;
+  padding: 20px;
+  border: 0;
+  border-bottom: 1px solid #e3e9f5;
+  border-radius: 0;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color .15s ease, background-color .15s ease;
+}
+
+.trade-proof-upload:hover {
+  background: #f2f6ff;
+}
+
+.trade-proof-upload:focus-within {
+  outline: 3px solid rgba(21, 94, 239, .14);
+  outline-offset: 2px;
+}
+
+.trade-proof-upload__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.trade-proof-upload__icon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  margin: 0 auto 2px;
+  border-radius: 50%;
+  background: #e5edff;
+  color: #155eef;
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.trade-proof-upload strong {
+  color: #2d3951;
+  font-size: 14px;
+}
+
+.trade-proof-upload span:last-child {
+  font-size: 12px;
+}
+
+.trade-proof-upload__filename {
+  margin: 10px 0 0 !important;
+  color: #4b5c7a !important;
+  font-size: 13px;
+}
+
+.trade-proof-thumbnail-list {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  margin: 0;
+  padding: 12px;
+  list-style: none;
+}
+
+.trade-proof-thumbnail-list li {
+  position: relative;
+  flex: 0 0 74px;
+}
+
+.trade-proof-thumbnail-list img {
+  display: block;
+  width: 74px;
+  height: 74px;
+  border: 1px solid #d6e2fb;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.trade-proof-thumbnail-list button {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  display: grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #344054;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.trade-proof-thumbnail-list button:disabled {
+  cursor: wait;
+  opacity: .55;
+}
+
+.trade-delivery-memo {
+  min-height: 164px;
+}
+
+.trade-review-form__label {
+  margin: 0 0 8px;
+  color: #4b5565;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.trade-review-form__content {
+  margin-top: 20px;
+}
+
+/* 담당자 7: 공백 없는 긴 리뷰도 카드 폭을 넘지 않게 자르고 최대 3줄까지만 표시한다. */
+.trade-review-content {
+  display: -webkit-box;
+  max-width: 100%;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+/* .input(App.css)의 min-height:40px보다 확실히 이기도록 부모 클래스와 묶어 특이도를 올린다
+   (같은 특이도의 두 규칙은 번들 순서에 좌우되는데, 카드 폭에 대한 확신 없이 순서에 기대지
+   않기 위함). */
+.trade-review-form .trade-review-form__textarea {
+  min-height: 180px;
+}
+
+.trade-review-form__representative-badge {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+}
+
+/* 발송 인증 사진(.trade-delivery-proof-gallery__item)과 같은 확대 힌트를 준다. */
+.trade-review-photo-trigger {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.trade-review-form-wrap {
+  position: relative;
+}
+
+.trade-review-form--disabled {
+  opacity: .5;
+  pointer-events: none;
+  user-select: none;
+}
+
+.trade-review-form__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  background: rgba(255, 255, 255, .55);
+  backdrop-filter: blur(1px);
+}
+
+.trade-review-form__overlay-notice {
+  margin: 0;
+  color: #344054;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.trade-proof-submit-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+
+.trade-image-modal {
+  display: flex;
+  width: min(560px, 100%);
+  height: min(620px, calc(100dvh - 48px));
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.trade-image-modal img {
+  display: block;
+  width: 100%;
+  min-height: 0;
+  flex: 1 1 auto;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+.trade-image-modal__navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.trade-image-modal__navigation span {
+  color: #667085;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.trade-proof-preview {
+  display: block;
+  width: min(280px, 100%);
+  max-height: 240px;
+  margin: 14px auto 0;
+  border: 1px solid #e2e8f3;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .trade-detail-page { padding: 28px 0 56px; }
+  .auction-trade-detail-shell { padding-top: 28px; }
+  .trade-detail-page__header { align-items: flex-start; flex-direction: column; }
+  .trade-detail-page__header h1 { font-size: 27px; }
+  .trade-stepper { padding: 4px 0; }
+  .trade-stepper__marker { width: 22px; height: 22px; font-size: 12px; }
+  .trade-stepper__label { font-size: 11px; }
+  .trade-detail-grid,
+  .trade-address-grid,
+  .trade-meeting-summary { grid-template-columns: 1fr; }
+  .trade-detail-card { padding: 20px; }
+  .trade-detail-actions { flex-direction: column; }
+  .trade-modal { align-items: flex-end; padding: 12px; }
+  .trade-modal__content { padding: 20px; }
+  .trade-detail-page--seller .trade-detail-grid,
+  .trade-detail-page--seller .trade-complete-card,
+  .trade-detail-page--seller .trade-detail-page__header,
+  .trade-detail-page--seller .trade-stepper,
+  .trade-detail-page--buyer .trade-detail-grid,
+  .trade-detail-page--buyer .trade-complete-card,
+  .trade-detail-page--buyer .trade-detail-page__header,
+  .trade-detail-page--buyer .trade-stepper { max-width: none; }
+  .trade-detail-skeleton__card {
+    min-height: 360px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .auction-trade-detail-shell {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .auction-trade-detail-shell > .trade-detail-page {
+    padding-bottom: 24px;
+  }
+
+  .auction-trade-detail-shell__review {
+    position: static;
+    padding: 0 0 48px;
+  }
+}

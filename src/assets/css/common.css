@@ -1,0 +1,335 @@
+/* src/assets/css/common.css */
+/* ─────────────────────────────────────────────────────────────────────────────
+   판매자 화면 공통 CSS — 목업(UI목업_v3) 기반으로 추출한 클래스 모음
+   App.css 의 전역 스타일(버튼·배지·카드)을 보완하며,
+   상품 등록 · 경매 활동 내역 · 판매자 경매 상세 화면에서 공유합니다.
+───────────────────────────────────────────────────────────────────────────── */
+
+/* ===========================
+   공통 유틸리티
+   — 텍스트 흐림(.muted)·소형(.small)·모노스페이스(.mono)
+     flex 행(.row), 세로 목록(.list), 카드형 목록 행(.list-row)
+=========================== */
+.muted { color: #5f5e5a; }
+.small { font-size: 13px; }
+.mono { font-family: 'Noto Sans Mono', monospace; }
+
+.row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.list { display: grid; gap: 12px; }
+
+.list-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  border: 1px solid #f0efec;
+  border-radius: 16px;
+  background: #fff;
+  padding: 16px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 2px 8px rgba(0,0,0,.06);
+}
+
+a.list-row {
+  transition: box-shadow .15s ease, transform .15s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+a.list-row:hover {
+  box-shadow: 0 6px 18px rgba(0,0,0,.10);
+  transform: translateY(-2px);
+}
+
+/* 이미지 플레이스홀더 — 상품 대표 이미지 미등록 시 표시하는 회색 빈 박스
+   FILES 연계(담당자6 백종남) 완료 후 <img> 태그로 교체 */
+.img-placeholder {
+  background: #e5e4df;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  border-radius: 8px;
+  min-height: 130px;
+  color: #5f5e5a;
+  overflow: hidden;
+}
+
+.img-placeholder img {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  display: block;
+  object-fit: cover;
+}
+
+/* 탭 — 화면 전환·필터 탭, .active 클래스로 선택 강조
+   MyProductListPage 상태별 필터, ProductRegisterPage 스텝 이동 등에 사용 */
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 16px; }
+.tab {
+  border: 1px solid #e2e1dc;
+  background: #fff;
+  color: #5f5e5a;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.tab.active { background: var(--color-primary, #0064ff); color: #fff; border-color: var(--color-primary, #0064ff); }
+
+/* 칩 — 복수 선택 항목 버튼, .active 클래스로 선택 상태 표시
+   ProductRegisterPage 카테고리 선택 칩에 사용 */
+.chip {
+  border: 1px solid #e2e1dc;
+  background: #fff;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.chip.active {
+  background: var(--color-primary, #0064ff);
+  color: #fff;
+  border-color: var(--color-primary, #0064ff);
+}
+
+/* 위저드 옵션 카드 — 서비스 요청서 카테고리별 단계 선택(아이콘+라벨+부제), .active로 선택 강조
+   ServiceRequestFormPage 카테고리·단계별 선택 그리드에 사용 (F-SVC-001~002) */
+.wizard-option-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.wizard-option-grid.big { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+.wizard-option {
+  border: 1px solid #e2e1dc;
+  background: #fff;
+  border-radius: 8px;
+  padding: 12px 14px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  text-align: left;
+  display: grid;
+  gap: 2px;
+}
+.wizard-option:hover { border-color: var(--color-primary, #0064ff); }
+.wizard-option.active { border-color: var(--color-primary, #0064ff); background: #e5efff; }
+.wizard-option.active .wizard-option-label { color: var(--color-primary-dark, #0048bf); font-weight: 700; }
+.wizard-option-icon { font-size: 26px; line-height: 1.2; }
+.wizard-option-label { font-weight: 500; }
+.wizard-option-sub { font-size: 12px; color: #888780; }
+
+/* 토스트 — 하단 중앙 고정 알림, JS에서 display 토글로 짧은 성공·실패 메시지 표시 */
+/* 스크롤 숨김 — 가로 스크롤이 생기는 칩·탭 목록에서 스크롤바만 감춰 깔끔하게 유지 */
+.scrollbar-hide {
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* 페이지 타이틀 — 각 페이지 상단 제목(h1)과 우측 액션 버튼을 가로로 배치하는 행 */
+.page-title { margin: 28px 0 18px; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
+.page-title h1 { margin: 0; font-size: 28px; letter-spacing: 0; }
+.page-title p { margin: 6px 0 0; color: #5f5e5a; }
+
+/* 히어로 검색바 — 서비스 찾기/경매 목록 상단의 입력창+검색버튼 (원래 service-search-bar였던 것을 공용화) */
+.hero-search-bar {
+  width: min(680px, 100%);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 58px;
+  margin: 0 auto 18px;
+  overflow: hidden;
+  border: 3px solid var(--color-primary, #0064ff);
+  border-radius: 14px;
+  background: #fff;
+}
+.hero-search-bar input { min-height: 52px; border: 0; padding: 0 18px; outline: 0; font: inherit; }
+.hero-search-bar button { display: flex; align-items: center; justify-content: center; border: 0; background: var(--color-primary, #0064ff); color: #fff; cursor: pointer; }
+.hero-search-bar button svg { width: 22px; height: 22px; }
+
+/* 스텝 인디케이터 — ProductRegisterPage 3단계 진행 표시
+   .active = 현재 단계(파란 밑줄), .done = 완료 단계(연한 파랑) */
+.steps { display: flex; gap: 0; margin-bottom: 32px; }
+.step { flex: 1; padding: 12px; text-align: center; border-bottom: 3px solid #f0efec; color: #888780; font-size: 18px; font-weight: 500; }
+.step.active { border-bottom-color: #0064ff; color: #0064ff; font-weight: 700; }
+.step.done { border-bottom-color: #e5efff; color: #5f5e5a; }
+
+/* 2·3컬럼 그리드 — ProductRegisterPage step2 등록확인 카드 나열에 사용 */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+/* 테이블 — 기본 테이블 스타일 (둥근 테두리·그림자)
+   .card 안에서는 이중 테두리 방지를 위해 border·shadow 제거 */
+table { width: 100%; border-collapse: separate; border-spacing: 0; background: #fff; border: 1px solid #f0efec; border-radius: 16px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 2px 8px rgba(0,0,0,.06); }
+.card table { box-shadow: none; border: none; }
+th, td { border-bottom: 1px solid #f0efec; padding: 12px 10px; text-align: left; font-size: 16px; vertical-align: top; }
+th { color: #5f5e5a; background: #fafaf8; font-weight: 700; white-space: nowrap; }
+table tr:last-child td { border-bottom: none; }
+
+/* 오버레이 모달 — .open 클래스 토글로 표시/숨김 (display:none → flex)
+   배경 클릭 시 닫히도록 onClick에서 e.target 비교 처리 */
+.user-modal-overlay {
+  position: fixed;
+  inset: 82px 0 0;
+  z-index: 180;
+}
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,.36); display: none; align-items: center; justify-content: center; padding: 24px; z-index: 2000; }
+.modal.open { display: flex; }
+.modal-box { width: min(560px, 100%); background: #fff; border-radius: 16px; padding: 22px; box-shadow: 0 20px 80px rgba(0,0,0,.25); }
+
+/* 캘린더 아이콘 버튼 — ProductRegisterPage 날짜 입력 옆 아이콘 버튼
+   클릭 시 캘린더 모달(setCalendarOpen)을 열어 종료일시 직접 설정 */
+.calendar-icon-btn { width: 43px; min-height: 34px; padding: 6px 12px; display: inline-flex; align-items: center; justify-content: center; color: #5f5e5a; }
+.calendar-icon-btn svg { width: 18px; height: 18px; display: block; }
+.calendar-icon-btn:hover { border-color: #0064ff; color: #0064ff; background: #e5efff; }
+
+/* 정책 동의 체크박스 래퍼 — ProductRegisterPage step1 경매 정책 동의,
+   step2 최종 등록 동의 체크박스 영역 */
+.policy-agree { margin-top: 12px; padding: 12px 14px; border: 1px solid #f0efec; border-radius: 8px; background: #fff; }
+
+/* 소형 버튼(.btn-sm) — MyProductListPage 목록 행의 판매 관리·삭제 등 인라인 버튼 크기 축소 */
+.btn-sm { padding: 8px 14px; font-size: 15px; }
+
+/* 이력 목록 — MyProductListPage 판매 목록·ProductDetailSellerPage 경매 활동 이력 행 레이아웃
+   썸네일(.history-thumb) + 제목·부가정보(.history-row-title) 가로 배치 */
+.history-toolbar { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 12px; }
+/* grid-template-columns 없이는 트랙이 content의 최소 너비(min-content)로 넓어져
+   자식의 text-overflow: ellipsis(truncate)가 무력화된다 - minmax(0, 1fr)로 1열을
+   명시해 트랙이 콘텐츠 폭 이하로도 줄어들 수 있게 한다. */
+.history-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.history-entry-main { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.history-thumb { flex: 0 0 64px; width: 64px; height: 64px; border: 1px solid #f0efec; border-radius: 8px; background: #e5e4df; overflow: hidden; }
+.history-thumb img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.history-row-title { display: grid; gap: 4px; min-width: 0; }
+.history-row-title h4 {
+  margin: 0;
+  overflow: hidden;
+  font-size: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.history-row-title p { margin: 0; }
+
+/* 워크스페이스 헤더 — 카드·섹션 내 제목(h3)+설명(p) 헤더 블록 레이아웃
+   우측에 액션 버튼을 배치할 때 flex justify-between으로 처리 */
+.workspace-head { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; margin-bottom: 20px; }
+.workspace-head h3 { margin: 0; font-size: 22px; }
+.workspace-head p { margin: 6px 0 0; color: #5f5e5a; }
+
+/* 판매자 경매 상세 (ProductDetailSellerPage 전용)
+   .seller-auction-layout: 왼쪽(상품정보·메트릭·이력) 2fr / 오른쪽(관리 패널) 1fr
+   .seller-metrics: 입찰현황·관심인원·종료정보 3칸 카드
+   .notice/.danger-note: 하단 안내 박스 (진행중=파랑, 귀책 확정 시 빨강으로 교체 예정) */
+.seller-auction-layout { display: grid; grid-template-columns: minmax(0,2fr) minmax(300px,1fr); gap: 20px; align-items: start; }
+.seller-product { display: grid; grid-template-columns: 180px minmax(0,1fr); gap: 20px; align-items: center; }
+.seller-product-img { width: 180px; height: 180px; border: 1px solid #f0efec; border-radius: 8px; background: #e5e4df; flex-shrink: 0; }
+.seller-status-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.seller-price { font-size: 24px; font-weight: 700; color: #0048bf; margin: 10px 0; line-height: 1.35; }
+.seller-metrics { display: grid; grid-template-columns: auto auto 1fr; gap: 10px; margin-top: 18px; align-items: stretch; }
+.seller-metric { min-height: 76px; padding: 14px; border: 1px solid #f0efec; border-radius: 8px; background: #fafaf8; }
+.seller-metric span { display: block; color: #5f5e5a; font-size: 12px; }
+.seller-metric strong { display: block; margin-top: 5px; font-size: 16px; line-height: 1.45; }
+/* 입찰 현황·관심 인원처럼 내용이 짧은 지표는 폭·여백을 줄여 콤팩트하게 표시 */
+.seller-metric-compact { min-height: 76px; padding: 10px 16px; border: 1px solid #f0efec; border-radius: 8px; background: #fafaf8; display: flex; flex-direction: column; justify-content: center; white-space: nowrap; }
+.seller-metric-compact span { display: block; color: #5f5e5a; font-size: 12px; }
+.seller-metric-compact strong { display: block; margin-top: 4px; font-size: 16px; line-height: 1.45; }
+/* 판매자 상세 — 제목/지표 vs 카테고리·거래형태·가격 정보 2단 분할, 모바일에서 1단으로 쌓임(제목/지표가 위) */
+.seller-info-split { display: grid; grid-template-columns: minmax(0,280px) 1fr; gap: 20px; }
+/* 판매자 상세 — 입찰 이력·구매자 문의 카드 2단 분할, 모바일에서 1단으로 쌓임(입찰 이력이 위) */
+.seller-history-split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.seller-action-list { display: grid; gap: 10px; }
+.seller-action-list .btn,
+.seller-action-list .ui-action-button { width: 100%; min-height: 42px; }
+.notice { border: 1px solid #c9ddff; border-radius: 8px; background: #f3f7ff; color: #5f5e5a; padding: 14px; font-size: 13px; line-height: 1.6; box-shadow: none; }
+.danger-note { border-color: #f3c7c7; background: #fcebeb; color: #a32d2d; }
+.seller-history { margin-top: 20px; border-top: 1px solid #f0efec; }
+.seller-history .list-row { display: flex; align-items: flex-start; padding: 11px 2px; border-bottom: 1px solid #f0efec; color: #5f5e5a; font-size: 14px; box-shadow: none; border-radius: 0; background: none; }
+@keyframes slideInFromRight {
+  from { transform: translateX(24px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+@keyframes slideInFromLeft {
+  from { transform: translateX(-24px); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+.slide-from-right { animation: slideInFromRight 0.22s ease; }
+.slide-from-left  { animation: slideInFromLeft  0.22s ease; }
+
+/* 상품등록 step0 카드(상품정보/경매설정) 2단 배치 — ProductRegisterPage 전용, 모바일에서 1단으로 접힘 */
+.product-register-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: stretch; }
+.product-info-cell { position: relative; }
+.product-info-card { position: absolute; inset: 0; }
+
+@media (max-width: 800px) {
+  .seller-auction-layout { grid-template-columns: 1fr; }
+  .seller-product { grid-template-columns: 1fr; gap: 14px; }
+  .seller-product-img { width: 100%; height: 220px; }
+  .seller-price-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .seller-price-divider { display: none; }
+  .seller-metrics { grid-template-columns: 1fr 1fr; }
+  .seller-info-split { grid-template-columns: 1fr; }
+  .seller-history-split { grid-template-columns: 1fr; }
+  .grid-2 { grid-template-columns: 1fr; }
+  /* 모바일에서는 카드가 세로로 쌓이는 데다 화면 폭 전체까지 늘어나면 답답해 보여서,
+     탭 바(product-register-steps)와 동일한 폭으로 좁혀 가운데 정렬한다 */
+  .product-register-grid,
+  .product-register-steps {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /* 1단으로 접히면 두 카드가 더 이상 같은 grid row를 공유하지 않아 absolute-stretch 트릭이
+     빈 높이(0)로 무너진다 — 모바일에서는 일반 흐름으로 되돌린다 */
+  .product-info-cell { position: static; }
+  .product-info-card { position: static; inset: auto; }
+}
+
+/* DateRangePicker 두 번째 달 — display:contents로 divider+달 두 요소를 부모 flex의 평평한 아이템으로
+   유지하다가, 모바일 폭에서는 통째로 숨겨 한 달만 보이게 한다 */
+.date-picker-second-month-group { display: contents; }
+@media (max-width: 700px) {
+  .date-picker-second-month-group,
+  .date-picker-second-month-label { display: none; }
+}
+
+/* 폼 필드 — label + input/select/textarea를 세로로 묶는 래퍼
+   경매 취소 모달·ProductRegisterPage 폼 요소 정렬에 공통 사용 */
+.field { display: grid; gap: 6px; margin-bottom: 14px; }
+.field > label { color: #1a1a18; font-size: 17px; font-weight: 700; }
+.field > label span, .field > label .muted { color: #5f5e5a; font-size: 15px; font-weight: 500; }
+
+/* 거래 형태 선택 버튼 — ProductRegisterPage step0 배송만·직거래만·둘 다 선택
+   .checked 클래스로 선택 상태 강조, 아이콘(.trade-icon)도 파랑으로 변경 */
+.deal-options .line-option {
+  min-width: 150px;
+  border: 1px solid #e2e1dc;
+  border-radius: 8px;
+  padding: 10px 14px;
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+  color: #1a1a18;
+}
+.deal-options .line-option.checked {
+  border-color: #0064ff;
+  background: #e5efff;
+  color: #0048bf;
+}
+.deal-options .trade-icon {
+  width: 18px;
+  height: 18px;
+  color: #5f5e5a;
+  flex: 0 0 auto;
+}
+.deal-options .line-option.checked .trade-icon {
+  color: #0048bf;
+}

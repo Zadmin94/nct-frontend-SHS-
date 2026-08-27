@@ -1,0 +1,88 @@
+.admin-layout {
+  --admin-sidebar-width: 220px;
+  --admin-sidebar-collapsed-width: 64px;
+  min-height: 100vh;
+  background: #f7f8fc;
+}
+
+.admin-layout__header {
+  position: fixed;
+  z-index: 60;
+  top: 0;
+  right: 0;
+  left: var(--admin-sidebar-width);
+  display: flex;
+  height: 56px;
+  align-items: center;
+  gap: 10px;
+  padding: 0 18px;
+  border-bottom: 1px solid #e3e6ef;
+  background: rgb(255 255 255 / 96%);
+  transition: left 180ms ease;
+}
+
+.admin-layout__menu-button {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d8dce8;
+  border-radius: 9px;
+  background: #fff;
+  color: #1f274c;
+  cursor: pointer;
+}
+
+.admin-layout__menu-button:hover { background: #f1f4fb; }
+.admin-layout__menu-button:focus-visible { outline: 3px solid rgb(37 99 235 / 25%); outline-offset: 2px; }
+.admin-layout__menu-button svg { width: 20px; height: 20px; }
+
+.admin-layout__header-label {
+  color: #4c5575;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.admin-layout__content {
+  min-width: 0;
+  min-height: 100vh;
+  margin-left: var(--admin-sidebar-width);
+  padding: 80px 24px 32px;
+  transition: margin-left 180ms ease;
+}
+
+.admin-layout.is-sidebar-collapsed .admin-layout__header {
+  left: var(--admin-sidebar-collapsed-width);
+}
+
+.admin-layout.is-sidebar-collapsed .admin-layout__content {
+  margin-left: var(--admin-sidebar-collapsed-width);
+}
+
+.admin-layout__backdrop { display: none; }
+
+@media (max-width: 768px) {
+  .admin-layout__header,
+  .admin-layout.is-sidebar-collapsed .admin-layout__header {
+    left: 0;
+  }
+
+  .admin-layout__content,
+  .admin-layout.is-sidebar-collapsed .admin-layout__content {
+    margin-left: 0;
+    padding: 72px 16px 24px;
+  }
+
+  .admin-layout__backdrop {
+    position: fixed;
+    z-index: 40;
+    inset: 56px 0 0;
+    display: block;
+    border: 0;
+    background: rgb(15 23 42 / 48%);
+    cursor: pointer;
+  }
+
+  .admin-layout.is-sidebar-collapsed .admin-layout__backdrop { display: none; }
+}

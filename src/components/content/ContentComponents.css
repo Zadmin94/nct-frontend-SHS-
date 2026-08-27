@@ -1,0 +1,64 @@
+.content-page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 22px;
+  margin-bottom: 24px;
+}
+
+.content-page-header > div:first-child > span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--color-primary, #0064ff);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+/* 담당자 7: 담당자 3 경매 화면이 따르는 공통 page-title(28px) 기준에 맞춥니다. */
+.content-page-header h1 { margin: 0; color: #1a1a18; font-size: 28px; }
+.content-page-header p { max-width: 720px; margin: 9px 0 0; color: #5f5e5a; line-height: 1.65; }
+
+/* 담당자 7 | F-COM-013: 공개 공지는 제목을 중심으로 빠르게 훑을 수 있는 목록으로 표시합니다. */
+.notice-list { overflow: hidden; border: 1px solid #e1e6ef; border-radius: 16px; background: #fff; box-shadow: 0 8px 24px rgb(16 24 40 / 5%); }
+
+.content-notice-row {
+  display: grid;
+  grid-template-columns: 74px 92px minmax(0, 1fr) 124px;
+  align-items: center;
+  min-height: 62px;
+  border-top: 1px solid #edf0f4;
+  color: #5f5e5a;
+  font-size: 15px;
+  text-decoration: none;
+  transition: background-color 140ms ease;
+}
+
+.content-notice-row:first-child { border-top: 0; }
+.content-notice-row:not(.content-notice-row--head):hover { background: #f7faff; }
+.content-notice-row.is-important { border-top-color: #f1d6d6; background: #fff6f6; }
+.content-notice-row.is-important:hover { background: #ffeded; }
+.content-notice-row > span,
+.content-notice-row > strong { min-width: 0; padding: 0 12px; }
+.content-notice-row__number,
+.content-notice-row__date { color: #8a94a8; text-align: center; }
+.content-notice-row__number { display: inline-flex; align-items: center; justify-content: center; gap: 4px; }
+.content-notice-row__number svg { width: 14px; height: 14px; }
+.content-notice-row.is-important .content-notice-row__number { color: #bb3e45; font-weight: 800; }
+.content-notice-row.is-important .content-notice-row__title { color: #942f37; }
+.content-notice-row__type { justify-self: center; border-radius: 999px; padding: 5px 10px !important; background: #edf4ff; color: var(--color-primary-dark, #0048bf); font-size: 13px; font-weight: 750; text-align: center; }
+.content-notice-row__title { overflow: hidden; color: #101828; font-size: 16px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.content-notice-row--head { min-height: 42px; border-top: 0; background: #f8fafc; color: #667085; font-size: 13px; font-weight: 800; text-align: center; }
+.content-notice-row--head > span:nth-child(2) { padding: 0 12px !important; background: transparent; color: inherit; font-size: inherit; }
+.content-notice-row--head > span:nth-child(3) { text-align: left; }
+
+@media (max-width: 640px) {
+  .content-notice-row { grid-template-columns: 70px minmax(0, 1fr) 112px; min-height: 46px; }
+  .content-notice-row__type { display: none; }
+  .content-notice-row__title { grid-column: 2; }
+  .content-notice-row__date { grid-column: 3; }
+  .content-notice-row--head { display: none; }
+}
+
+@media (max-width: 640px) {
+  .content-page-header { align-items: flex-start; flex-direction: column; }
+}

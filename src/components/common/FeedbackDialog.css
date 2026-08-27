@@ -1,0 +1,218 @@
+/* 담당자 7: 5번 시안을 기준으로 Alert·Confirm·Toast·SweetAlert2를 같은 시각 체계로 묶습니다. */
+.feedback-dialog__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 4000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgb(17 24 39 / 46%);
+  backdrop-filter: blur(2px);
+  animation: feedback-overlay-in 140ms ease-out;
+}
+
+.feedback-dialog__overlay--leaving {
+  pointer-events: none;
+  animation: feedback-overlay-out 180ms ease-in forwards;
+}
+
+.feedback-dialog {
+  --feedback-tone: var(--ui-color-primary, #0064ff);
+  --feedback-tone-soft: var(--ui-color-primary-soft, #e5efff);
+  display: flex;
+  width: min(100%, 400px);
+  max-height: min(86vh, 680px);
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  border: 1px solid var(--ui-color-border-soft, #f0efec);
+  border-radius: 18px;
+  background: var(--ui-color-surface, #fff);
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 24px 70px rgb(15 23 42 / 24%);
+  animation: feedback-dialog-in 170ms ease-out;
+}
+
+.feedback-dialog--leaving { animation: feedback-dialog-out 180ms ease-in forwards; }
+
+.feedback-dialog--sm { width: min(100%, 320px); padding: 24px; }
+.feedback-dialog--md { width: min(100%, 400px); padding: 30px; }
+.feedback-dialog--lg { width: min(100%, 540px); padding: 36px; }
+
+.feedback-dialog--success { --feedback-tone: #32a85f; --feedback-tone-soft: #ecf9f1; }
+.feedback-dialog--warning { --feedback-tone: #d18a00; --feedback-tone-soft: #fff7df; }
+.feedback-dialog--error { --feedback-tone: var(--ui-color-danger, #e63946); --feedback-tone-soft: #fff0f1; }
+.feedback-dialog--info { --feedback-tone: var(--ui-color-primary, #0064ff); --feedback-tone-soft: #edf4ff; }
+
+.feedback-dialog__icon {
+  display: flex;
+  width: 58px;
+  height: 58px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  border: 2px solid color-mix(in srgb, var(--feedback-tone) 58%, white);
+  border-radius: 50%;
+  background: var(--feedback-tone-soft);
+  color: var(--feedback-tone);
+}
+
+.feedback-dialog__icon svg { width: 31px; height: 31px; stroke-width: 2; }
+.feedback-dialog--sm .feedback-dialog__icon { width: 48px; height: 48px; margin-bottom: 14px; }
+.feedback-dialog--sm .feedback-dialog__icon svg { width: 26px; height: 26px; }
+.feedback-dialog--lg .feedback-dialog__icon { width: 66px; height: 66px; margin-bottom: 20px; }
+.feedback-dialog--lg .feedback-dialog__icon svg { width: 36px; height: 36px; }
+
+.feedback-dialog__title {
+  margin: 0;
+  color: var(--ui-color-text, #1a1a18);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.45;
+  word-break: keep-all;
+}
+
+.feedback-dialog--sm .feedback-dialog__title { font-size: 18px; }
+.feedback-dialog--lg .feedback-dialog__title { font-size: 22px; }
+
+.feedback-dialog__description {
+  margin: 8px 0 0;
+  color: var(--ui-color-text-subtle, #5f5e5a);
+  font-size: 15px;
+  line-height: 1.65;
+  white-space: pre-line;
+  word-break: keep-all;
+}
+
+.feedback-dialog--sm .feedback-dialog__description { font-size: 14px; }
+.feedback-dialog--lg .feedback-dialog__description { font-size: 16px; }
+
+.feedback-dialog__actions {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.feedback-dialog__button { min-width: 96px; }
+.feedback-dialog--sm .feedback-dialog__button { height: 40px; min-width: 82px; padding: 0 18px; font-size: 15px; }
+.feedback-dialog--lg .feedback-dialog__button { min-width: 118px; }
+
+.feedback-toast {
+  --feedback-tone: var(--ui-color-primary, #0064ff);
+  --feedback-tone-soft: #edf4ff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 4200;
+  transform: translate(-50%, -50%);
+  display: flex;
+  width: min(calc(100% - 32px), 320px);
+  min-height: 180px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 1px solid var(--ui-color-border-soft, #f0efec);
+  border-radius: 14px;
+  background: #fff;
+  padding: 24px;
+  color: var(--ui-color-text, #1a1a18);
+  text-align: center;
+  box-shadow: 0 16px 40px rgb(15 23 42 / 20%);
+  animation: feedback-toast-in 180ms ease-out;
+}
+
+.feedback-toast--success { --feedback-tone: #32a85f; --feedback-tone-soft: #ecf9f1; }
+.feedback-toast--warning { --feedback-tone: #d18a00; --feedback-tone-soft: #fff7df; }
+.feedback-toast--error { --feedback-tone: var(--ui-color-danger, #e63946); --feedback-tone-soft: #fff0f1; }
+.feedback-toast--leaving {
+  pointer-events: none;
+  animation: feedback-toast-out 180ms ease-in forwards;
+}
+
+.feedback-toast__icon {
+  display: flex;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--feedback-tone-soft);
+  color: var(--feedback-tone);
+}
+
+.feedback-toast__icon svg { width: 26px; height: 26px; }
+.feedback-toast__message { min-width: 0; font-size: 18px; font-weight: 700; line-height: 1.5; word-break: keep-all; }
+
+/* SweetAlert2도 React 공통 모달과 같은 소·중·대 규격을 사용합니다. */
+/* html의 stable scrollbar gutter가 페이지 폭을 이미 보존하므로 SweetAlert2의
+   padding 보정을 중복 적용하지 않는다. 오버레이 바깥의 예약 gutter도 같은 색으로 채운다. */
+html:has(body.swal2-shown .feedback-swal) {
+  background-color: var(--swal2-backdrop, rgb(0 0 0 / 40%));
+}
+
+body.swal2-shown:has(.feedback-swal) {
+  padding-right: 0 !important;
+}
+
+.swal2-popup.feedback-swal {
+  width: min(calc(100% - 32px), 400px) !important;
+  border: 1px solid var(--ui-color-border-soft, #f0efec);
+  border-radius: 18px;
+  padding: 30px;
+  font-family: inherit;
+  box-shadow: 0 24px 70px rgb(15 23 42 / 24%);
+}
+
+.swal2-popup.feedback-swal--sm { width: min(calc(100% - 32px), 320px) !important; padding: 24px; }
+.swal2-popup.feedback-swal--lg { width: min(calc(100% - 32px), 540px) !important; padding: 36px; }
+.feedback-swal .swal2-icon { margin: 0 auto 18px; }
+.feedback-swal__title { padding: 0 !important; color: var(--ui-color-text, #1a1a18) !important; font-size: 20px !important; line-height: 1.45 !important; }
+.feedback-swal--sm .feedback-swal__title { font-size: 18px !important; }
+.feedback-swal--lg .feedback-swal__title { font-size: 22px !important; }
+.feedback-swal__description { margin: 8px 0 0 !important; padding: 0 !important; color: var(--ui-color-text-subtle, #5f5e5a) !important; font-size: 15px !important; line-height: 1.65 !important; }
+.feedback-swal__actions { gap: 10px; margin: 24px 0 0 !important; }
+.feedback-swal__button { min-width: 96px; margin: 0 !important; }
+
+.feedback-swal-in { animation: feedback-dialog-in 180ms ease-out both; }
+.feedback-swal-out { animation: feedback-dialog-out 180ms ease-in forwards !important; }
+.feedback-swal-backdrop-in { animation: feedback-overlay-in 180ms ease-out both; }
+.feedback-swal-backdrop-out { animation: feedback-overlay-out 180ms ease-in forwards !important; }
+
+@keyframes feedback-overlay-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes feedback-overlay-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes feedback-dialog-in { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: none; } }
+@keyframes feedback-dialog-out { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(8px) scale(.98); } }
+@keyframes feedback-toast-in {
+  from { opacity: 0; transform: translate(-50%, calc(-50% + 10px)) scale(.98); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+@keyframes feedback-toast-out {
+  from { opacity: 1; transform: translate(-50%, -50%); }
+  to { opacity: 0; transform: translate(-50%, calc(-50% + 10px)) scale(.98); }
+}
+
+@media (max-width: 640px) {
+  .feedback-dialog__overlay { padding: 16px; }
+  .feedback-dialog,
+  .feedback-dialog--lg { padding: 26px 20px; }
+  .feedback-dialog__actions { flex-direction: column-reverse; }
+  .feedback-dialog__button { width: 100%; }
+  .feedback-toast { width: min(calc(100% - 32px), 320px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feedback-dialog__overlay,
+  .feedback-dialog,
+  .feedback-toast,
+  .feedback-swal-in,
+  .feedback-swal-out,
+  .feedback-swal-backdrop-in,
+  .feedback-swal-backdrop-out { animation: none !important; }
+}

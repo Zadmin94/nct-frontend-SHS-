@@ -1,0 +1,64 @@
+/* Claude Code 작성 (BJN, 2026-07-18)
+   감사로그·시스템설정 관리자 화면 공용 스타일 (담당자6 BJN)
+   - 공지 관리(adminContentPages.css, 담당자7 소유)와 비슷한 톤을 내되
+     타 담당자 파일에 의존하지 않도록 담당자6 화면 전용 클래스로 분리했다 */
+
+.admin-bjn-page { max-width: 1600px; margin: 0 auto; color: #1f274c; }
+.admin-bjn-page svg { width: 17px; height: 17px; }
+
+/* 필터 줄 */
+.admin-bjn-filters {
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end;
+  padding: 16px; margin-bottom: 16px;
+  background: #fff; border: 1px solid #e4e7f2; border-radius: 12px;
+}
+.admin-bjn-filters label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #5b6486; }
+.admin-bjn-filters input, .admin-bjn-filters select {
+  height: 36px; padding: 0 10px; min-width: 130px;
+  border: 1px solid #d4d9e8; border-radius: 8px; font-size: 14px;
+}
+.admin-bjn-filters button {
+  height: 36px; padding: 0 18px; border: none; border-radius: 8px;
+  background: #2f5bff; color: #fff; font-size: 14px; font-weight: 700; cursor: pointer;
+}
+.admin-bjn-filters button:hover { background: #0048bf; }
+.admin-bjn-filter-error { margin: -8px 0 12px; color: #d92d20; font-size: 13px; font-weight: 600; }
+
+/* 표 */
+.admin-bjn-table-scroll { overflow-x: auto; background: #fff; border: 1px solid #e4e7f2; border-radius: 12px; }
+.admin-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.admin-table th, .admin-table td { padding: 10px 12px; text-align: center; border-bottom: 1px solid #eef0f7; white-space: nowrap; }
+.admin-bjn-reason-preview { display: block; width: 100%; overflow: hidden; border: 0; background: transparent; color: inherit; cursor: pointer; font: inherit; text-align: left; text-overflow: ellipsis; white-space: nowrap; }
+.admin-bjn-reason-preview:hover { color: #2f5bff; text-decoration: underline; }
+
+.admin-bjn-reason-dialog { position: fixed; z-index: 1000; inset: 0; display: grid; place-items: center; padding: 20px; background: rgb(17 24 39 / 48%); }
+.admin-bjn-reason-dialog section { width: min(680px, 100%); max-height: min(600px, calc(100vh - 40px)); overflow: auto; padding: 22px; border-radius: 12px; background: #fff; box-shadow: 0 18px 60px rgb(15 23 42 / 24%); }
+.admin-bjn-reason-dialog section > div { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.admin-bjn-reason-dialog h2 { margin: 0; font-size: 18px; }
+.admin-bjn-reason-dialog button { display: inline-flex; width: 34px; height: 34px; align-items: center; justify-content: center; border: 0; border-radius: 8px; background: #f2f4f8; color: #334155; cursor: pointer; }
+.admin-bjn-reason-dialog p { margin: 8px 0 16px; color: #64748b; font-size: 13px; }
+.admin-bjn-reason-details { display: grid; gap: 14px; margin: 0; }
+.admin-bjn-reason-details div { display: grid; gap: 5px; }
+.admin-bjn-reason-details dt { color: #475569; font-size: 13px; font-weight: 800; }
+.admin-bjn-reason-details dd { margin: 0; white-space: pre-wrap; word-break: break-word; line-height: 1.65; }
+
+/* 로딩·빈 상태 */
+.admin-bjn-state { display: flex; min-height: 160px; align-items: center; justify-content: center; padding: 24px; color: #5b6486; }
+.admin-bjn-state.is-error { color: #b42318; }
+
+/* 시스템 설정 폼 */
+.admin-bjn-setting-form { display: flex; flex-direction: column; gap: 16px; }
+.admin-bjn-setting-section { padding: 16px; background: #fff; border: 1px solid #e4e7f2; border-radius: 12px; }
+.admin-bjn-setting-section h3 { margin: 0 0 12px; font-size: 15px; }
+.admin-bjn-setting-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.admin-bjn-setting-grid label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #5b6486; }
+.admin-bjn-setting-grid input, .admin-bjn-setting-grid select {
+  height: 36px; padding: 0 10px; border: 1px solid #d4d9e8; border-radius: 8px; font-size: 14px;
+}
+.admin-bjn-setting-actions { display: flex; gap: 10px; align-items: center; }
+.admin-bjn-setting-actions button {
+  height: 40px; padding: 0 24px; border: none; border-radius: 8px;
+  background: #2f5bff; color: #fff; font-size: 14px; font-weight: 700; cursor: pointer;
+}
+.admin-bjn-setting-actions button:disabled { background: #d4d9e8; cursor: not-allowed; }
+.admin-bjn-setting-actions .is-error { color: #b42318; font-size: 13px; }

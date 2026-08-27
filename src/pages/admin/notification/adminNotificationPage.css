@@ -1,0 +1,38 @@
+/* Claude Code 작성 (BJN, 2026-07-19)
+   관리자 알림 화면 전용 스타일 (담당자6 BJN) — adminAuditPage.css와 같은 톤(색상·radius) */
+
+.admin-noti-tabs { margin-bottom: 16px; }
+.admin-noti-tabs,
+.admin-noti-grid {
+  font-family: var(--font-sans, 'Pretendard', 'Noto Sans KR', 'Malgun Gothic', sans-serif);
+}
+.admin-noti-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.admin-noti-grid > :only-child { grid-column: 1 / -1; }
+.admin-noti-group { padding: 16px; background: #fff; border: 1px solid #e4e7f2; border-radius: 12px; }
+.admin-noti-group h3 { margin: 0 0 12px; font-size: 17px; line-height: 1.4; color: #1f274c; }
+.admin-noti-empty { margin: 0; font-size: 14px; line-height: 1.5; color: #5b6486; }
+
+.admin-noti-list { display: grid; gap: 10px; }
+.admin-noti-card {
+  padding: 12px 14px; border: 1px solid #eef0f7; border-radius: 8px; background: #fafbfe;
+}
+.admin-noti-card strong { display: block; font-size: 15px; line-height: 1.45; color: #1f274c; }
+.admin-noti-card p { margin: 4px 0 0; font-size: 14px; line-height: 1.55; color: #5b6486; }
+.admin-noti-card.is-clickable { cursor: pointer; }
+.admin-noti-card.is-clickable:hover { border-color: #2f5bff; background: #f0f4ff; }
+
+/* 담당자 7: 알림 로딩도 실제 그룹·카드 자리에서만 지연 노출합니다. */
+.admin-noti-grid--skeleton {
+  opacity: 0;
+  animation: admin-noti-skeleton-reveal 0s linear 250ms forwards;
+}
+
+.admin-noti-grid--skeleton .admin-noti-card { min-height: 64px; box-sizing: border-box; }
+
+@keyframes admin-noti-skeleton-reveal {
+  to { opacity: 1; }
+}
+
+@media (max-width: 900px) {
+  .admin-noti-grid { grid-template-columns: minmax(0, 1fr); }
+}

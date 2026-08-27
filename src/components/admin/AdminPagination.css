@@ -1,0 +1,55 @@
+/* 담당자 7: 공용 페이지 이동 동작 위에 관리자 화면 전용 시각 스타일만 적용합니다. */
+.admin-pagination {
+  --admin-pagination-accent: #0057d9;
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  align-self: stretch;
+  align-items: center;
+  justify-content: center;
+  grid-column: 1 / -1;
+  min-height: 68px;
+  margin: 0;
+  padding: 16px 0;
+  border-top: 1px solid #e6eaf0;
+}
+
+.admin-pagination .pagination__controls {
+  margin-right: auto;
+  margin-left: auto;
+  gap: 6px;
+}
+
+.admin-pagination button {
+  border-color: #d8dee9;
+  border-radius: 9px;
+  background: #fff;
+  color: #475467;
+  box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
+  transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease;
+}
+
+.admin-pagination button:hover:not(:disabled):not([aria-current='page']) {
+  border-color: #8db5f8;
+  background: #f5f8ff;
+  color: var(--admin-pagination-accent);
+}
+
+.admin-pagination button[aria-current='page'] {
+  border-color: var(--admin-pagination-accent);
+  background: var(--admin-pagination-accent);
+  color: #fff;
+  box-shadow: 0 4px 10px rgb(0 87 217 / 20%);
+}
+
+.admin-pagination button:disabled {
+  background: #f5f6f8;
+  color: #a0a7b5;
+  box-shadow: none;
+}
+
+@media (max-width: 640px) {
+  .admin-pagination .pagination__controls { gap: 5px; }
+  .admin-pagination .pagination__boundary { display: none; }
+}

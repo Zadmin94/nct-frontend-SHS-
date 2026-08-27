@@ -1,0 +1,999 @@
+.service-trade-detail-page {
+  min-height: 100%;
+  padding: 0 0 72px;
+  background: #fff;
+  overflow-x: clip;
+}
+.service-trade-detail-page .container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  padding-top: 24px;
+}
+
+.service-trade-detail-page__list-link { color: #475467; }
+
+.service-trade-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.service-trade-status > span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.service-trade-status--progress { background: #e8f7ed; color: #16703b; }
+.service-trade-status--pending { background: #fff4df; color: #a15c00; }
+.service-trade-status--complete { background: #e9f0ff; color: #155eef; }
+.service-trade-status--problem { background: #fff0f0; color: #ba2525; }
+.service-trade-status--canceled { background: #f2f4f7; color: #667085; }
+
+@media (min-width: 1024px) {
+  .service-trade-detail-page .container { padding-top: 40px; }
+}
+
+.service-trade-viewer-role {
+  color: #666;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.service-trade-progress {
+  display: grid;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  grid-template-columns: repeat(4, minmax(100px, 1fr));
+  margin: 0 0 40px;
+  padding: 0;
+  list-style: none;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+.service-trade-progress__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 56px;
+  color: #8a8a8a;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.service-trade-progress__item:not(:last-child)::after {
+  position: absolute;
+  top: 13px;
+  right: calc(-50% + 13px);
+  width: calc(100% - 26px);
+  height: 2px;
+  background: #d9e1ee;
+  content: '';
+}
+
+.service-trade-progress__marker {
+  display: inline-grid;
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  place-items: center;
+  border: 1px solid #dadada;
+  border-radius: 50%;
+  background: #fff;
+  color: #8a8a8a;
+  font-size: 13px;
+}
+
+.service-trade-progress__item--active {
+  background: transparent;
+  color: #155eef;
+}
+
+.service-trade-progress__item--active .service-trade-progress__marker {
+  border-color: #0064ff;
+  background: #0064ff;
+  color: #fff;
+}
+
+.service-trade-progress__item--current .service-trade-progress__marker {
+  border-color: #0064ff;
+  background: #fff;
+  color: #0064ff;
+  box-shadow: 0 0 0 3px #e8f0ff;
+}
+
+.service-trade-detail-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, .62fr);
+  align-items: center;
+  gap: 16px;
+}
+
+.service-trade-detail-layout__main {
+  display: grid;
+  min-width: 0;
+  gap: 16px;
+}
+
+.service-trade-panel,
+.service-trade-action-panel {
+  border: 1px solid #e1e7f0;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(31, 54, 90, .05);
+}
+
+.service-trade-panel {
+  padding: 24px;
+}
+
+.service-trade-panel__header,
+.service-trade-action-panel__status-heading {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #1d1d1f;
+}
+
+.service-trade-panel__header {
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e9edf4;
+}
+
+.service-trade-panel__header svg,
+.service-trade-action-panel__status-heading svg {
+  color: #0064ff;
+}
+
+.service-trade-panel h2,
+.service-trade-action-panel h2 {
+  margin: 0;
+  font-size: var(--text-body-lg, 18px);
+  font-weight: 800;
+}
+
+.service-trade-detail-list {
+  margin: 0;
+}
+
+.service-trade-detail-list > div {
+  display: grid;
+  grid-template-columns: minmax(120px, 180px) minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid #edf0f5;
+}
+
+.service-trade-detail-list dt {
+  color: #666;
+  font-size: var(--text-body-sm, 15px);
+  font-weight: 700;
+}
+
+.service-trade-detail-list dd {
+  min-width: 0;
+  margin: 0;
+  color: #1d1d1f;
+  font-size: var(--text-body-md, 16px);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.service-trade-detail-list__amount {
+  color: #0048bf !important;
+  font-size: var(--text-body-lg, 18px) !important;
+}
+
+.service-trade-panel__empty {
+  margin: 20px 0 0;
+  color: #777;
+  font-size: var(--text-body-sm, 15px);
+}
+
+.service-trade-action-panel {
+  position: sticky;
+  top: 98px;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.service-trade-action-panel__status,
+.service-trade-escrow-summary,
+.service-trade-detail-actions,
+.service-trade-action-panel__closed {
+  padding: 22px 24px;
+}
+
+.service-trade-action-panel__status {
+  border-bottom: 1px solid #e9edf4;
+  background: linear-gradient(135deg, #f7faff, #fff);
+}
+
+.service-trade-action-panel__status-heading {
+  margin-bottom: 18px;
+}
+
+.service-trade-action-panel__status > strong {
+  display: block;
+  color: #1d1d1f;
+  font-size: 21px;
+  line-height: 1.4;
+}
+
+.service-trade-action-panel__status > p,
+.service-trade-escrow-summary > p {
+  margin: 6px 0 0;
+  color: #666;
+  font-size: var(--text-body-sm, 15px);
+  line-height: 1.55;
+}
+
+.service-trade-escrow-summary {
+  border-bottom: 1px solid #e9edf4;
+  background: #f6f9ff;
+}
+
+.service-trade-escrow-summary > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #555;
+  font-size: var(--text-body-sm, 15px);
+  font-weight: 700;
+}
+
+.service-trade-escrow-summary > div svg {
+  color: #0064ff;
+}
+
+.service-trade-escrow-summary > strong {
+  display: block;
+  margin-top: 9px;
+  color: #0048bf;
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+.service-trade-detail-actions {
+  display: grid;
+  gap: 14px;
+}
+
+.service-trade-detail-actions__group {
+  display: grid;
+  gap: 8px;
+}
+
+.service-trade-detail-actions__group--secondary {
+  padding-top: 14px;
+  border-top: 1px solid #e9edf4;
+}
+
+.service-trade-detail-actions__group--danger {
+  padding-top: 14px;
+  border-top: 1px solid #e9edf4;
+}
+
+.service-trade-detail-actions__group .btn,
+.service-trade-detail-actions__group .ui-action-button {
+  display: inline-flex;
+  width: 100%;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 10px;
+}
+
+.service-trade-detail-actions__problem {
+  border: 1.5px solid #d92d20;
+  background: #fff7f6;
+  color: #b42318;
+  font-weight: 800;
+}
+
+.service-trade-detail-actions__problem:hover {
+  border-color: #b42318;
+  background: #ffebe9;
+  opacity: 1;
+}
+
+.service-trade-detail-actions__problem:focus-visible {
+  outline: 3px solid #ffd7d3;
+  outline-offset: 2px;
+}
+
+.service-trade-action-panel__closed {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: var(--text-body-sm, 15px);
+}
+
+.service-trade-action-panel__closed svg {
+  color: #176b3a;
+}
+
+.service-trade-action-panel__notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin: 0 24px 22px;
+  color: #a13a31;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.service-trade-action-panel__notice svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+.service-trade-detail-page__empty {
+  padding-top: 56px;
+  text-align: center;
+}
+
+.service-trade-detail-page__empty p {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* 담당자4 서비스 거래 상세 전용 카드 구성 */
+.service-trade-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+/* 서비스 거래도 물건 거래와 동일한 3열 카드 골격을 쓴다. 서비스 전용 정보와 행동만 각 구획에 담는다. */
+.service-trade-detail-grid > .trade-detail-card {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.service-trade-card__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.service-trade-card__title-row h3 { margin: 0 0 12px; }
+.service-trade-card__title-row svg { margin-bottom: 12px; color: #155eef; }
+
+.service-trade-info__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.service-trade-info__heading h3 { margin: 0; }
+
+.service-trade-info__heading .btn,
+.service-trade-info__heading .ui-action-button {
+  min-height: 40px;
+  padding: 0 14px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.service-trade-request-title {
+  display: block;
+  color: #252b3a;
+  font-size: 17px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.service-trade-next-step {
+  color: #667085 !important;
+  font-size: 13px;
+}
+
+.service-trade-next-step strong { color: #155eef; }
+
+.service-trade-card,
+.service-trade-action-panel {
+  border: 1px solid #dce2ed;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: none;
+}
+
+.service-trade-card {
+  padding: 20px;
+}
+
+.service-trade-card--summary {
+  display: flex;
+  flex-direction: column;
+}
+
+.service-trade-card__block--status {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #ebebeb;
+}
+
+.service-trade-overview-grid > .auction-trade-detail-shell__review {
+  min-width: 0;
+}
+
+.service-trade-overview-grid > .auction-trade-detail-shell__review > .trade-detail-card {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.service-trade-card--guide {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+.service-trade-card__header {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ebebeb;
+  color: #252b3a;
+}
+
+.service-trade-card__header svg { color: #155eef; }
+.service-trade-card__header h2,
+.service-trade-action-panel__header h2 { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -.3px; }
+
+.service-trade-card--status {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+.service-trade-card__status-label {
+  display: block;
+  margin-top: 20px;
+  color: #252b3a;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.service-trade-card__status-description {
+  margin: 8px 0 16px;
+  color: #5e687b;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.service-trade-card__escrow {
+  margin-top: 12px;
+  box-sizing: border-box;
+  display: flex;
+  min-height: 142px;
+  flex-direction: column;
+  justify-content: center;
+  padding: 18px;
+  border: 1px solid #d9e5fb;
+  border-radius: 12px;
+  background: #f4f8ff;
+}
+
+.service-trade-guide__request {
+  margin-top: 4px;
+  padding: 14px;
+  border: 1px solid #e3ebf8;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.service-trade-guide__request > span {
+  display: block;
+  color: #667085;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.service-trade-guide__request > strong {
+  display: block;
+  margin-top: 7px;
+  color: #252b3a;
+  font-size: 17px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.service-trade-guide__request > p {
+  margin: 7px 0 0;
+  color: #667085;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.service-trade-guide__next-step {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 9px;
+  background: #edf4ff;
+}
+
+.service-trade-guide__next-step > span {
+  color: #4f6690;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.service-trade-guide__next-step > strong {
+  color: #155eef;
+  font-size: 14px;
+}
+
+.service-trade-detail-list--service-info > div {
+  grid-template-columns: minmax(100px, .72fr) minmax(0, 1.28fr);
+  gap: 12px;
+  padding: 16px 0;
+}
+
+.service-trade-detail-list--service-info dt {
+  color: #666;
+  font-size: 15px;
+}
+
+.service-trade-detail-list__request-content dd {
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+.service-trade-card__escrow > span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #49658f;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.service-trade-card__escrow > span svg { color: #155eef; }
+.service-trade-card__escrow > strong { display: block; margin-top: 5px; color: #155eef; font-size: 21px; }
+.service-trade-card__escrow > p { margin: 3px 0 0; color: #667085; font-size: 12px; line-height: 1.5; }
+
+.service-trade-card--schedule { margin: 0 0 18px; }
+.service-trade-card__empty { margin: 18px 0 0; color: #667085; font-size: 14px; }
+
+.service-trade-inline-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e9edf4;
+}
+
+.service-trade-inline-actions__group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.service-trade-inline-actions__group .btn,
+.service-trade-inline-actions__group .ui-action-button {
+  width: auto;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 10px;
+}
+
+.service-trade-inline-actions__group--primary {
+  width: 100%;
+}
+
+.service-trade-inline-actions__group--primary .btn,
+.service-trade-inline-actions__group--primary .ui-action-button {
+  width: 100%;
+}
+
+.service-trade-inline-actions--status {
+  margin-top: auto;
+}
+
+@media (min-width: 861px) {
+  .service-trade-inline-actions--summary .service-trade-inline-actions__group {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .service-trade-inline-actions--summary .service-trade-inline-actions__group .btn,
+  .service-trade-inline-actions--summary .service-trade-inline-actions__group .ui-action-button {
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding: 0 7px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .service-trade-inline-actions--summary .service-trade-inline-actions__group .btn svg,
+  .service-trade-inline-actions--summary .service-trade-inline-actions__group .ui-action-button svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.service-trade-inline-actions__chat {
+  border: 1px solid #86d9ad;
+  background: #effbf3;
+  color: #087443;
+  font-weight: 800;
+}
+
+.service-trade-inline-actions__chat:hover {
+  border-color: #36a269;
+  background: #dcf7e6;
+  color: #056838;
+}
+
+.service-trade-cancellation-decision {
+  display: flex;
+  align-items: center;
+  flex: 1 1 100%;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px;
+  border: 1px solid #f4c7c3;
+  border-radius: 10px;
+  background: #fff8f7;
+}
+
+.service-trade-cancellation-decision strong { color: #9b1c1c; font-size: 14px; }
+.service-trade-cancellation-decision p { margin: 4px 0 0; color: #7a3c38; font-size: 12px; }
+.service-trade-cancellation-decision__actions { display: flex; flex: 0 0 auto; gap: 8px; }
+
+.service-trade-cancellation-decision__actions .btn,
+.service-trade-cancellation-decision__actions .ui-action-button {
+  display: inline-flex;
+  width: 144px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  font-weight: 800;
+}
+
+.service-trade-cancellation-decision__actions .btn-ghost,
+.service-trade-cancellation-decision__actions .ui-action-button--neutral {
+  border-color: #cbd5e1;
+  background: #fff;
+  color: #475467;
+}
+
+.service-trade-cancellation-decision__actions .btn-primary,
+.service-trade-cancellation-decision__actions .ui-action-button--danger {
+  border-color: #d92d20;
+  background: #d92d20;
+  color: #fff;
+}
+
+.service-trade-cancellation-decision__actions .btn-primary:hover,
+.service-trade-cancellation-decision__actions .ui-action-button--danger:hover {
+  border-color: #b42318;
+  background: #b42318;
+}
+
+.service-trade-card__dispute-action {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 14px;
+}
+
+.service-trade-card__dispute-action .btn,
+.service-trade-card__dispute-action .ui-action-button {
+  flex: 0 0 auto;
+  min-height: 32px;
+  padding: 0 9px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.service-trade-card__dispute-action p {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  color: #b42318;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+@media (max-width: 860px) {
+  .service-trade-overview-grid { grid-template-columns: 1fr; }
+  .service-trade-card--summary { display: block; }
+  .service-trade-card--status { min-height: auto; }
+  .service-trade-card__escrow { margin-top: 0; min-height: auto; }
+  .service-trade-inline-actions { align-items: stretch; flex-direction: column; margin-top: 18px; }
+  .service-trade-inline-actions__group { width: 100%; flex-direction: column; }
+  .service-trade-inline-actions__group .btn,
+  .service-trade-inline-actions__group .ui-action-button { width: 100%; }
+  .service-trade-card__dispute-action { align-items: flex-start; flex-direction: column; }
+  .service-trade-card__dispute-action .btn,
+  .service-trade-card__dispute-action .ui-action-button { width: 100%; }
+  .service-trade-card__dispute-action p { white-space: normal; }
+}
+
+@media (max-width: 1100px) and (min-width: 861px) {
+  .service-trade-overview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .service-trade-card--status { grid-column: span 2; }
+  .service-trade-card--status .service-trade-card__escrow { margin-top: 0; }
+}
+
+@media (max-width: 640px) {
+  .service-trade-card { padding: 20px; }
+}
+
+.service-trade-dialog-backdrop {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(17, 24, 39, .48);
+}
+
+.service-trade-dialog {
+  width: min(100%, 520px);
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, .26);
+}
+
+.service-trade-dialog__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 24px 24px 18px;
+  border-bottom: 1px solid #e9edf4;
+}
+
+.service-trade-dialog__header h2 { margin: 0; color: #1d1d1f; font-size: 22px; }
+.service-trade-dialog__close { border: 0; background: transparent; color: #667085; font-size: 28px; line-height: 1; cursor: pointer; }
+
+.service-trade-dispute-form,
+.service-trade-dialog__result { padding: 24px; }
+
+.service-trade-dispute-form { display: grid; gap: 9px; }
+.service-trade-dispute-form label { margin-top: 8px; color: #344054; font-size: 14px; font-weight: 800; }
+.service-trade-dispute-form select,
+.service-trade-dispute-form textarea,
+.service-trade-dispute-form input {
+  width: 100%;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #252b3a;
+  font: inherit;
+}
+.service-trade-dispute-form select { height: 44px; padding: 0 12px; background: #fff; }
+.service-trade-dispute-form input { height: 44px; padding: 0 12px; background: #fff; }
+.service-trade-dispute-form textarea { min-height: 138px; padding: 12px; resize: vertical; }
+.service-trade-dispute-form select:focus,
+.service-trade-dispute-form textarea:focus,
+.service-trade-dispute-form input:focus { border-color: #0064ff; outline: 3px solid #e5efff; }
+.service-trade-schedule-picker-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.service-trade-dispute-form .service-trade-schedule-picker-grid > label,
+.service-trade-time-slots-field,
+.service-trade-date-picker-field { display: grid; align-content: start; gap: 8px; margin: 0; min-width: 0; color: #344054; font-size: 14px; font-weight: 800; }
+.service-trade-time-slots-field,
+.service-trade-date-picker-field { position: relative; }
+.service-trade-time-slots-field__label { line-height: 21px; }
+.service-trade-schedule-picker-grid input,
+.service-trade-time-picker-trigger { box-sizing: border-box; height: 44px; }
+.service-trade-time-picker-trigger { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 0 12px; border: 1px solid #d0d5dd; border-radius: 8px; background: #fff; color: #344054; cursor: pointer; font: inherit; }
+.service-trade-time-picker-trigger:disabled { background: #f2f4f7; color: #98a2b3; cursor: not-allowed; }
+.service-trade-time-slots-field > p { margin: 0; color: #667085; font-size: 12px; font-weight: 400; line-height: 1.5; }
+.service-trade-date-picker { position: absolute; z-index: 3; top: 76px; right: 0; left: 0; overflow: hidden; border-radius: 8px; box-shadow: 0 8px 16px rgb(16 24 40 / 12%); }
+.service-trade-date-picker .date-picker-second-month-group,
+.service-trade-date-picker .date-picker-second-month-label { display: none; }
+.service-trade-dispute-form__notice { margin: 0 0 4px; padding: 12px; border-radius: 8px; background: #fff6df; color: #8a5900; font-size: 14px; line-height: 1.5; }
+.service-trade-dispute-form__help,
+.service-trade-dispute-form__count { margin: 0; color: #667085; font-size: 12px; text-align: right; }
+.service-trade-dispute-form__help { text-align: left; }
+.service-trade-dispute-form__reference-error { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.service-trade-dispute-form__reference-error button { flex: 0 0 auto; border: 0; background: transparent; color: #0064ff; cursor: pointer; font-size: 12px; font-weight: 800; }
+.service-trade-dispute-form__reference-error button:hover { text-decoration: underline; }
+.service-trade-dispute-file-input {
+  position: absolute;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.service-trade-dispute-file-picker {
+  display: flex;
+  min-height: 52px;
+  align-items: center;
+  gap: 8px;
+  margin: 0 !important;
+  border: 1px dashed #9bbcff;
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: #f7faff;
+  color: #155eef !important;
+  cursor: pointer;
+}
+
+.service-trade-dispute-file-picker small {
+  margin-left: auto;
+  color: #667085;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.service-trade-dispute-file-input:focus-visible + .service-trade-dispute-file-list,
+.service-trade-dispute-file-picker:has(+ .service-trade-dispute-file-input:focus-visible) {
+  outline: 3px solid #e5efff;
+  outline-offset: 2px;
+}
+
+.service-trade-dispute-file-list {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.service-trade-dispute-file-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto 28px;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #e4e7ec;
+  border-radius: 8px;
+  padding: 8px 9px 8px 11px;
+  background: #fff;
+}
+
+.service-trade-dispute-file-list li > span {
+  overflow: hidden;
+  color: #344054;
+  font-size: 13px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.service-trade-dispute-file-list li > small {
+  color: #667085;
+  font-size: 11px;
+}
+
+.service-trade-dispute-file-list button {
+  display: inline-grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: #667085;
+  cursor: pointer;
+}
+
+.service-trade-dispute-file-list button:hover {
+  background: #f2f4f7;
+  color: #b42318;
+}
+.service-trade-dispute-form__error { margin: 2px 0 0; color: #ba2525; font-size: 13px; font-weight: 700; }
+.service-trade-dispute-form__actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+.service-trade-dialog__result { display: grid; gap: 12px; }
+.service-trade-dialog__result strong { color: #0048bf; font-size: 18px; }
+.service-trade-dialog__result p { margin: 0; color: #667085; line-height: 1.6; }
+
+.service-trade-schedule-history { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+.service-trade-schedule-history li { position: relative; padding: 18px 0 18px 28px; border-bottom: 1px solid #eeeeec; color: #555; }
+.service-trade-schedule-history li:last-child { padding-bottom: 0; border-bottom: 0; }
+.service-trade-schedule-history li::before { position: absolute; left: 2px; top: 25px; width: 9px; height: 9px; border-radius: 50%; background: #0064ff; content: ''; }
+.service-trade-schedule-history strong { display: block; color: #1d1d1f; font-size: var(--text-body-md, 16px); }
+.service-trade-schedule-history span { color: #777; font-size: 13px; }
+.service-trade-schedule-history p { margin: 5px 0 0; font-size: var(--text-body-sm, 15px); }
+.service-trade-history-pagination { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 20px; }
+.service-trade-history-pagination button { min-width: 64px; height: 34px; border: 1px solid #d8dce5; border-radius: 8px; background: #fff; color: #454a56; font-weight: 700; }
+.service-trade-history-pagination button:disabled { cursor: not-allowed; opacity: .45; }
+.service-trade-history-pagination span { min-width: 42px; color: #606776; font-size: 14px; text-align: center; }
+
+.service-trade-counterpart {
+  margin-bottom: 14px;
+}
+
+.service-trade-counterpart__name {
+  display: inline-block;
+  margin: 0 0 4px;
+  color: #252b3a;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+a.service-trade-counterpart__name:hover {
+  color: #155eef;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 1024px) {
+  .service-trade-detail-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .service-trade-action-panel {
+    position: static;
+    order: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .service-trade-detail-page { padding-bottom: 56px; }
+  .service-trade-detail-page__header { align-items: stretch; flex-direction: column; gap: 18px; }
+  .service-trade-detail-page h1 { font-size: 28px; }
+  .service-trade-progress {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    overflow-x: hidden;
+  }
+  .service-trade-progress__item {
+    min-width: 0;
+    flex-direction: column;
+    gap: 5px;
+    text-align: center;
+    font-size: 13px;
+  }
+  .service-trade-progress__item:not(:last-child)::after { display: none; }
+  .service-trade-panel { padding: 20px; }
+  .service-trade-action-panel__status,
+  .service-trade-escrow-summary,
+  .service-trade-detail-actions,
+  .service-trade-action-panel__closed { padding: 20px; }
+  .service-trade-action-panel__notice { margin: 0 20px 20px; }
+  .service-trade-detail-list > div { grid-template-columns: 1fr; gap: 5px; padding: 15px 0; }
+  .service-trade-dialog-backdrop { align-items: end; padding: 0; }
+  .service-trade-dialog { width: 100%; border-radius: 8px 8px 0 0; }
+  .service-trade-dialog__header,
+  .service-trade-dispute-form,
+  .service-trade-dialog__result { padding: 20px; }
+  .service-trade-dispute-file-picker { align-items: flex-start; flex-wrap: wrap; }
+  .service-trade-dispute-file-picker small { width: 100%; margin-left: 26px; }
+  .service-trade-schedule-picker-grid { grid-template-columns: 1fr; }
+}
