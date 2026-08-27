@@ -1,0 +1,93 @@
+name: React CI with Yarn
+
+on:
+  pull_request:
+    branches: [ "main" ]
+    types: [closed]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Release 생성을 위해 write로 변경
+
+    steps:
+      - name: Checkout source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'yarn'
+          cache-dependency-path: ./yarn.lock
+
+      - name: Install Dependencies
+        run: |
+          if [ -f yarn.lock ]; then
+            yarn install --frozen-lockfile
+          else
+            npm ci
+          fi
+
+      - name: Create .env file
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > ./.env.production
+
+      - name: Vite Build with Yarn
+        run: |
+          if [ -f yarn.lock ]; then
+            yarn build
+          else
+            npm run build
+          fi
+
+      - name: Archive dist
+        run: tar -czf dist.tar.gz -C ./dist .
+
+      - name: Upload artifact (for debugging / history)
+        uses: actions/upload-artifact@v4
+        with:
+          name: front-dist
+          path: dist.tar.gz
+          retention-days: 7
+
+      # GitHub Release에 dist.tar.gz 업로드
+      - name: Upload dist to GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: front-deploy-latest
+          name: "Front Latest Deploy"
+          files: dist.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 서버에서 wget으로 다운로드 후 배포
+      - name: Deploy via SSH (wget)
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.OCI_HOST }}
+          username: ${{ secrets.OCI_USER }}
+          key: ${{ secrets.KSMARTDEV }}
+          script: |
+              DEPLOY_PATH="${{ secrets.OCI_DEPLOY_PATH }}"
+            
+              # /tmp에 다운로드
+              wget -q \
+                --header="Authorization: token ${{ secrets.GH_PAT }}" \
+                --header="Accept: application/octet-stream" \
+                "https://github.com/${{ github.repository }}/releases/download/front-deploy-latest/dist.tar.gz" \
+                -O /tmp/dist.tar.gz || { echo "wget 실패!"; exit 1; }
+            
+              echo "다운로드 완료!"
+              ls -lh /tmp/dist.tar.gz
+            
+              # 기존 dist 내용 삭제
+              sudo find "$DEPLOY_PATH/dist" -mindepth 1 -delete
+            
+              # 압축 해제
+              sudo tar -xzf /tmp/dist.tar.gz -C "$DEPLOY_PATH/dist" || { echo "압축해제 실패!"; exit 1; }
+            
+              rm /tmp/dist.tar.gz
+              echo "배포 완료!"
+              ls -lh "$DEPLOY_PATH/dist"
